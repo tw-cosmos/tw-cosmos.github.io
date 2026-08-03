@@ -71,16 +71,16 @@ def render_price(project):
     unit = esc(project.get("price_unit"))
 
     if amount in (None, "", "TBD"):
-        head = "參考起始價 : 待更新"
+        head = "參考起始價：待更新"
     else:
         try:
             amount = f"{int(amount):,}"
         except (TypeError, ValueError):
             amount = esc(amount)
-        head = f"參考起始價 : NT${amount} 起"
+        head = f"參考起始價：NT${amount}起"
 
     if unit:
-        head = f"{head} ( {unit} )"
+        head = f"{head}（{unit}）"
 
     return f"  <p>{head}</p>"
 
@@ -91,15 +91,15 @@ def render_validity(project):
 
     if not end:
         return ""
-    line = f"適用期間 : 販售至 {end}"
+    line = f"適用期間：販售至{end}"
     if note:
-        line = f"{line} ({note})"
+        line = f"{line}（{note}）"
     return f"  <p>{line}</p>"
 
 
 _SERVICE_CHARGE = {
-    "included": "本價格已含 10% 服務費。",
-    "excluded": "本價格未含 10% 服務費，結帳時另計。",
+    "included": "本價格已含10%服務費。",
+    "excluded": "本價格未含10%服務費，結帳時另計。",
 }
 
 
@@ -176,7 +176,7 @@ def build(data_file, style):
     verified = ""
     if prop.get("verified_date"):
         verified = (
-            f'\n<hr>\n<p class="note">內容更新日 : '
+            f'\n<hr>\n<p class="note">內容更新日：'
             f'{esc(prop.get("verified_date"))}</p>'
         )
 
