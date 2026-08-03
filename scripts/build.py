@@ -63,11 +63,10 @@ def render_detail(items, style):
     if style == "ul":
         rows = "\n".join(f"    <li>{i}</li>" for i in clean)
         return f"  <ul>\n{rows}\n  </ul>"
-    return "  <p>" + "、".join(clean) + "</p>"
+    return "  <p>" + "，".join(clean) + "</p>"
 
 
-def render_price(project, disclaimer):
-    """Reference starting price plus the shared floating-price note."""
+def render_price(project):
     amount = project.get("price_from")
     unit = esc(project.get("price_unit"))
 
@@ -83,23 +82,38 @@ def render_price(project, disclaimer):
     if unit:
         head = f"{head} ( {unit} )"
 
-    out = [f"  <p>{head}</p>"]
-    if disclaimer:
-        out.append(f'  <p class="note">{esc(disclaimer)}</p>')
-    return "\n".join(out)
+    return f"  <p>{head}</p>"
 
 
 def render_validity(project):
-    start = esc(project.get("valid_from"))
     end = esc(project.get("valid_to"))
     note = esc(project.get("valid_note"))
 
-    if not start and not end:
+    if not end:
         return ""
-    line = f"適用期間 : {start} - {end}"
+    line = f"適用期間 : 販售至 {end}"
     if note:
-        line = f"{line} ( {note} )"
+        line = f"{line} ({note})"
     return f"  <p>{line}</p>"
+
+
+_SERVICE_CHARGE = {
+    "included": "本價格已含 10% 服務費。",
+    "excluded": "本價格未含 10% 服務費，結帳時另計。",
+}
+
+
+def render_service_charge(project, src):
+    val = str(project.get("service_charge") or "").strip()
+    if val == "unstated":
+        sys.exit(
+            f"[{src}] project {project.get('id', '?')!r}: "
+            "service_charge=unstated — aborting."
+        )
+    text = _SERVICE_CHARGE.get(val)
+    if not text:
+        return ""
+    return f"  <p>{text}</p>"
 
 
 def render_link(project):
@@ -109,8 +123,7 @@ def render_link(project):
     return f'  <p><a href="{url}">線上訂房</a></p>'
 
 
-def render_project(project, disclaimer, style):
-    """One project = one <section>, no blank lines inside."""
+def render_project(project, disclaimer, style, src):
     name_zh = esc(project.get("name_zh"))
     name_en = esc(project.get("name_en"))
     if not name_zh and not name_en:
@@ -118,11 +131,15 @@ def render_project(project, disclaimer, style):
 
     heading = " ".join(x for x in (name_zh, name_en) if x)
 
+    disclaimer_html = f'  <p class="note">{esc(disclaimer)}</p>' if disclaimer else ""
+
     parts = [f"  <h2>{heading}</h2>"]
     for chunk in (
-        render_price(project, disclaimer),
+        render_price(project),
         render_detail(project.get("detail"), style),
         render_validity(project),
+        render_service_charge(project, src),
+        disclaimer_html,
         render_link(project),
     ):
         if chunk:
@@ -141,7 +158,7 @@ def build(data_file, style):
 
     sections = []
     for project in (data.get("projects") or []):
-        block = render_project(project, disclaimer, style)
+        block = render_project(project, disclaimer, style, str(data_file))
         if block:
             sections.append(block)
 
