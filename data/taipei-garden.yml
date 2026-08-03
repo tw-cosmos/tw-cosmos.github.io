@@ -2,50 +2,50 @@ property:
   slug: taipei-garden
   name_zh: 台北花園大酒店
   name_en: Taipei Garden Hotel
-  page_title: 台北花園大酒店 ・ 住宿專案
-  page_description: 台北花園大酒店住宿專案資訊,含專案內容與適用期間。
-  price_disclaimer: 價格為參考起始價,實際房價依訂房日期與房型浮動,請以線上訂房系統顯示為準。
+  page_title: 台北花園大酒店、住宿專案
+  page_description: 台北花園大酒店住宿專案資訊，含專案內容與適用期間。
+  price_disclaimer: 價格為參考起始價，實際房價依訂房日期與房型浮動，請以線上訂房系統顯示為準。
   verified_date: 2026.07.29
   verified_source: 官網促銷活動頁
 projects:
 - id: 1
-  name_zh: 環保愛地球住房優惠 ( 無障礙安心住房國人限定 )
+  name_zh: 環保愛地球住房優惠（無障礙安心住房國人限定）
   name_en: ''
   price_from: 3045
   price_unit: 每房每晚
   service_charge: included
   detail:
-  - 雅緻客房 ( 愛心房無障礙 ) 雙人住宿一晚,不含早餐
-  - 每房贈送旅艋舺遊西門古蹟紙雕乙份 ( 款式隨機,贈完為止 )
+  - 雅緻客房（愛心房無障礙）雙人住宿一晚，不含早餐
+  - 每房贈送「旅艋舺 遊西門」古蹟紙雕乙份（款式隨機，贈完為止）
   - 免費柑仔鋪取用乙次
-  - 限持國民身分證 ・ 台灣護照或外僑居留證者入住,入住時需出示本人有效證件
-  - 每日限量 3 間,不得與其他優惠合併使用,不適用房型升等
-  - 續住期間不提供打掃 ・ 更換毛巾及床組服務,不提供 Mini bar 與一次性盥洗用品
+  - 限持國民身分證、台灣護照或外僑居留證者入住，入住時需出示本人有效證件
+  - 每日限量 3 間，不得與其他優惠合併使用，不適用房型升等
+  - 續住期間不提供打掃、更換毛巾及床組服務，不提供 Mini bar 與一次性盥洗用品
   valid_to: 2027.06.30
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=Love-Our-Environment&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK&FSTBKNGTrackLink=CUST-APP
 - id: 2
-  name_zh: 官網優惠專案 ( 不含早 )
+  name_zh: 官網優惠專案（不含早）
   name_en: ''
   price_from: 3545
   price_unit: 每房每晚
   service_charge: excluded
   detail:
   - 不含早餐
-  - 每房贈送旅艋舺遊西門古蹟紙雕乙份 ( 款式隨機,贈完為止 )
+  - 每房贈送「旅艋舺 遊西門」古蹟紙雕乙份（款式隨機，贈完為止）
   - 免費柑仔鋪取用乙次
   valid_to: 2027.06.30
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=Best-Available-Rate&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK&FSTBKNGTrackLink=CUST-APP
 - id: 3
-  name_zh: 官網優惠專案 ( 含早餐 )
+  name_zh: 官網優惠專案（含早餐）
   name_en: ''
   price_from: 3999
   price_unit: 每房每晚
   service_charge: excluded
   detail:
   - 包含早餐
-  - 每房贈送旅艋舺遊西門古蹟紙雕乙份 ( 款式隨機,贈完為止 )
+  - 每房贈送「旅艋舺 遊西門」古蹟紙雕乙份（款式隨機，贈完為止）
   - 免費柑仔鋪取用乙次
   valid_to: 2027.06.30
   valid_note: ''
@@ -58,8 +58,8 @@ projects:
   service_charge: excluded
   detail:
   - 依房型人數提供隔日早餐
-  - 入住期間享花園饗聚廚房 Happy Hour ( 依房型人數贈送,供應時間 15:00 - 17:00 )
-  - 每房贈送旅艋舺遊西門古蹟紙雕乙份 ( 款式隨機,贈完為止 )
+  - 入住期間享花園饗聚廚房 Happy Hour（依房型人數贈送，供應時間 15:00 - 17:00）
+  - 每房贈送「旅艋舺 遊西門」古蹟紙雕乙份（款式隨機，贈完為止）
   - 免費柑仔鋪取用乙次
   - 適用 Cosmos CLUB 會員消費累點
   valid_to: 2027.06.30
@@ -73,24 +73,24 @@ projects:
   service_charge: included
   detail:
   - 包含早餐
-  - 註冊 Cosmos CLUB 會員,預訂享 9 折優惠
-  - 每房贈送旅艋舺遊西門古蹟紙雕乙份 ( 款式隨機,贈完為止 )
+  - 註冊 Cosmos CLUB 會員，預訂享 9 折優惠
+  - 每房贈送「旅艋舺 遊西門」古蹟紙雕乙份（款式隨機，贈完為止）
   - 免費柑仔鋪取用乙次
-  - 僅限會員本人預訂,訂房時於特殊需求欄位填入會員編號
-  - 無法出示會員身分或不符資格者,須現場補足原房費價差
-  - 不得與其他優惠合併使用,可與會員禮遇合併
+  - 僅限會員本人預訂，訂房時於「特殊需求」欄位填入會員編號
+  - 無法出示會員身分或不符資格者，須現場補足原房費價差
+  - 不得與其他優惠合併使用，可與會員禮遇合併
   valid_to: 2026.12.18
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2023-Cosmos-CLUB-Members-Only&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK&FSTBKNGTrackLink=CUST-APP
 - id: 6
-  name_zh: 雙鐵旅遊 ・ 低碳同行住房專案
+  name_zh: 雙鐵旅遊、低碳同行住房專案
   name_en: ''
   price_from: 4454
   price_unit: 每房每晚
   service_charge: excluded
   detail:
   - 依房型人數提供隔日早餐
-  - 持入住期間台灣高鐵或台灣鐵路車票票根,住房享 96 折優惠
+  - 持入住期間台灣高鐵或台灣鐵路車票票根，住房享 96 折優惠
   - 免費柑仔鋪取用乙次
   - 不得與其他優惠合併使用
   valid_to: 2026.09.30
@@ -103,11 +103,11 @@ projects:
   price_unit: 每房每晚
   service_charge: included
   detail:
-  - 豪華套房或花園套房,依房型人數提供隔日早餐
-  - 入住當日享花園饗聚廚房 Happy Hour ( 依房型人數贈送,供應時間 15:00 - 17:00 )
+  - 豪華套房或花園套房，依房型人數提供隔日早餐
+  - 入住當日享花園饗聚廚房 Happy Hour（依房型人數贈送，供應時間 15:00 - 17:00）
   - 每房加贈比比家族沐浴泡澡球禮盒乙盒
   - 入住免費贈送紅酒每房乙瓶
-  - 每房贈送旅艋舺遊西門古蹟紙雕乙份 ( 款式隨機,贈完為止 )
+  - 每房贈送「旅艋舺 遊西門」古蹟紙雕乙份（款式隨機，贈完為止）
   - 免費柑仔鋪取用乙次
   - 不得與其他優惠合併使用
   valid_to: 2027.06.30
