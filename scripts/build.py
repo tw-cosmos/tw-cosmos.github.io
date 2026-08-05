@@ -5,9 +5,13 @@ Static page builder.
 Reads YAML data files from data/ and writes one HTML page per file
 to <slug>/index.html.
 
+Each offer renders as a single self-contained paragraph that opens with
+the venue name and the offer name, so that any fragment of the text
+remains attributable to the correct offer when processed downstream.
+
 Usage:
     python scripts/build.py
-    python scripts/build.py --style ul
+    python scripts/build.py --style list
 
 Requires: pip install pyyaml
 """
@@ -23,11 +27,14 @@ except ImportError:
     sys.exit("Missing dependency. Run: pip install pyyaml")
 
 
-# Rendering mode for project detail lines.
-#   "inline" -> single line, items joined by a full-width enumeration comma
-#   "ul"     -> <ul><li> list
-# Kept as a switch so the same data file can produce either layout.
-DEFAULT_STYLE = "inline"
+# "narrative" -> one flowing paragraph per offer (default)
+# "list"      -> heading plus <ul><li>, kept for comparison only
+DEFAULT_STYLE = "narrative"
+
+SERVICE_CHARGE = {
+    "included": "本價格已含 10% 服務費",
+    "excluded": "本價格未含 10% 服務費，結帳時另計",
+}
 
 CSS = """
 :root { color-scheme: light; }
@@ -36,18 +43,18 @@ body {
   padding: 2rem 1.25rem 4rem;
   max-width: 44rem;
   font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif;
-  line-height: 1.85;
+  line-height: 1.9;
   color: #222;
   background: #fff;
 }
-h1 { font-size: 1.5rem; margin: 0 0 .5rem; }
-h2 { font-size: 1.15rem; margin: 2.5rem 0 .5rem; }
-p { margin: .4rem 0; }
+h1 { font-size: 1.5rem; margin: 0 0 1.5rem; }
+h2 { font-size: 1.1rem; margin: 2.2rem 0 .4rem; }
+p { margin: .5rem 0; }
 ul { margin: .4rem 0; padding-left: 1.3rem; }
-li { margin: .2rem 0; }
+section { margin-bottom: 2.2rem; }
 a { color: #0a5; }
 .note { color: #666; font-size: .9rem; }
-hr { border: 0; border-top: 1px solid #eee; margin: 2rem 0; }
+hr { border: 0; border-top: 1px solid #eee; margin: 2.5rem 0 1.5rem; }
 """
 
 
@@ -55,95 +62,79 @@ def esc(value):
     return html.escape(str(value or "").strip())
 
 
-def render_detail(items, style):
-    """Render the detail lines of one project."""
-    clean = [esc(i) for i in (items or []) if str(i).strip()]
-    if not clean:
-        return ""
-    if style == "ul":
-        rows = "\n".join(f"    <li>{i}</li>" for i in clean)
-        return f"  <ul>\n{rows}\n  </ul>"
-    return "  <p>" + "，".join(clean) + "</p>"
+def price_phrase(offer):
+    amount = offer.get("price_from")
+    unit = str(offer.get("price_unit") or "").strip()
+    charge = SERVICE_CHARGE.get(offer.get("service_charge"))
 
-
-def render_price(project):
-    amount = project.get("price_from")
-    unit = esc(project.get("price_unit"))
+    if charge is None:
+        raise ValueError(
+            f"offer {offer.get('id')}: service_charge must be "
+            f"'included' or 'excluded', got {offer.get('service_charge')!r}"
+        )
 
     if amount in (None, "", "TBD"):
-        head = "參考起始價：待更新"
-    else:
-        try:
-            amount = f"{int(amount):,}"
-        except (TypeError, ValueError):
-            amount = esc(amount)
-        head = f"參考起始價：NT${amount}起"
+        raise ValueError(f"offer {offer.get('id')}: price_from not confirmed")
 
-    if unit:
-        head = f"{head}（{unit}）"
+    try:
+        amount = f"{int(amount):,}"
+    except (TypeError, ValueError):
+        pass
 
-    return f"  <p>{head}</p>"
+    inner = "，".join(x for x in (unit, charge) if x)
+    return f"參考起始價 NT${amount} 起（{inner}）"
 
 
-def render_validity(project):
-    end = esc(project.get("valid_to"))
-    note = esc(project.get("valid_note"))
-
+def validity_phrase(offer):
+    end = str(offer.get("valid_to") or "").strip()
     if not end:
-        return ""
-    line = f"適用期間：販售至{end}"
+        raise ValueError(f"offer {offer.get('id')}: valid_to is required")
+    note = str(offer.get("valid_note") or "").strip()
+    text = f"販售至 {end}"
     if note:
-        line = f"{line}（{note}）"
-    return f"  <p>{line}</p>"
+        text += f"（{note}）"
+    return text
 
 
-_SERVICE_CHARGE = {
-    "included": "本價格已含10%服務費。",
-    "excluded": "本價格未含10%服務費，結帳時另計。",
-}
+def render_narrative(venue, offer, disclaimer):
+    """One offer, one paragraph, opening with venue and offer name."""
+    body = "，".join(str(x).strip() for x in (offer.get("detail") or []) if str(x).strip())
+
+    sentence = (
+        f"{venue}「{offer['name_zh']}」："
+        f"{price_phrase(offer)}，"
+        f"{body}，"
+        f"{validity_phrase(offer)}。"
+    )
+
+    parts = [f"  <p>{esc(sentence)}</p>"]
+    if disclaimer:
+        parts.append(f'  <p class="note">{esc(disclaimer)}</p>')
+
+    url = str(offer.get("booking_url") or "").strip()
+    if url:
+        parts.append(f'  <p><a href="{esc(url)}">線上訂房</a></p>')
+
+    return "<section>\n" + "\n".join(parts) + "\n</section>"
 
 
-def render_service_charge(project, src):
-    val = str(project.get("service_charge") or "").strip()
-    if val == "unstated":
-        sys.exit(
-            f"[{src}] project {project.get('id', '?')!r}: "
-            "service_charge=unstated — aborting."
-        )
-    text = _SERVICE_CHARGE.get(val)
-    if not text:
-        return ""
-    return f"  <p>{text}</p>"
+def render_list(venue, offer, disclaimer):
+    """Heading plus bullet list. Retained for side-by-side comparison."""
+    items = [esc(x) for x in (offer.get("detail") or []) if str(x).strip()]
+    rows = "\n".join(f"    <li>{i}</li>" for i in items)
 
+    parts = [
+        f"  <h2>{esc(venue)}「{esc(offer['name_zh'])}」</h2>",
+        f"  <p>{esc(price_phrase(offer))}</p>",
+        f"  <ul>\n{rows}\n  </ul>",
+        f"  <p>{esc(validity_phrase(offer))}</p>",
+    ]
+    if disclaimer:
+        parts.append(f'  <p class="note">{esc(disclaimer)}</p>')
 
-def render_link(project):
-    url = esc(project.get("booking_url"))
-    if not url:
-        return ""
-    return f'  <p><a href="{url}">線上訂房</a></p>'
-
-
-def render_project(project, disclaimer, style, src):
-    name_zh = esc(project.get("name_zh"))
-    name_en = esc(project.get("name_en"))
-    if not name_zh and not name_en:
-        return ""
-
-    heading = " ".join(x for x in (name_zh, name_en) if x)
-
-    disclaimer_html = f'  <p class="note">{esc(disclaimer)}</p>' if disclaimer else ""
-
-    parts = [f"  <h2>{heading}</h2>"]
-    for chunk in (
-        render_price(project),
-        render_detail(project.get("detail"), style),
-        render_validity(project),
-        render_service_charge(project, src),
-        disclaimer_html,
-        render_link(project),
-    ):
-        if chunk:
-            parts.append(chunk)
+    url = str(offer.get("booking_url") or "").strip()
+    if url:
+        parts.append(f'  <p><a href="{esc(url)}">線上訂房</a></p>')
 
     return "<section>\n" + "\n".join(parts) + "\n</section>"
 
@@ -154,24 +145,32 @@ def build(data_file, style):
 
     prop = data.get("property") or {}
     slug = prop.get("slug") or Path(data_file).stem
+    venue = str(prop.get("name_zh") or slug).strip()
     disclaimer = prop.get("price_disclaimer")
 
+    render = render_narrative if style == "narrative" else render_list
+
     sections = []
-    for project in (data.get("projects") or []):
-        block = render_project(project, disclaimer, style, str(data_file))
-        if block:
-            sections.append(block)
+    lengths = []
+    for offer in (data.get("projects") or []):
+        if not offer.get("name_zh"):
+            continue
+        sections.append(render(venue, offer, disclaimer))
+        # plain-text length of this block, for the downstream size check
+        plain = (
+            f"{venue}「{offer['name_zh']}」：{price_phrase(offer)}，"
+            + "，".join(str(x).strip() for x in (offer.get("detail") or []))
+            + f"，{validity_phrase(offer)}。"
+        )
+        lengths.append((offer.get("id"), len(plain)))
 
     if not sections:
         sections.append("<section>\n  <p>內容準備中。</p>\n</section>")
 
-    # Sections are separated by a blank line so that the rendered plain
-    # text has a paragraph break between projects, and none within one.
     body = "\n\n".join(sections)
 
-    title = esc(prop.get("page_title") or prop.get("name_zh") or slug)
+    title = esc(prop.get("page_title") or venue)
     description = esc(prop.get("page_description"))
-    heading = esc(prop.get("name_zh") or slug)
 
     verified = ""
     if prop.get("verified_date"):
@@ -191,7 +190,7 @@ def build(data_file, style):
 <style>{CSS}</style>
 </head>
 <body>
-<h1>{heading}</h1>
+<h1>{esc(venue)}</h1>
 
 {body}{verified}
 </body>
@@ -201,17 +200,15 @@ def build(data_file, style):
     out_path = Path(slug) / "index.html"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(page, encoding="utf-8")
-    print(f"{data_file} -> {out_path} ({len(sections)} sections, style={style})")
+
+    report = ", ".join(f"#{i}:{n}" for i, n in lengths)
+    print(f"{data_file} -> {out_path} [{style}] {len(sections)} sections")
+    print(f"  plain-text length per section: {report}")
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--style",
-        choices=["inline", "ul"],
-        default=DEFAULT_STYLE,
-        help="How to render project detail lines.",
-    )
+    parser.add_argument("--style", choices=["narrative", "list"], default=DEFAULT_STYLE)
     args = parser.parse_args()
 
     data_dir = Path("data")
@@ -223,7 +220,10 @@ def main():
         sys.exit("No .yml files found in data/.")
 
     for data_file in files:
-        build(data_file, args.style)
+        try:
+            build(data_file, args.style)
+        except ValueError as err:
+            sys.exit(f"ERROR in {data_file}: {err}")
 
 
 if __name__ == "__main__":
