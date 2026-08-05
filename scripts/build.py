@@ -106,10 +106,13 @@ def render_narrative(venue, offer, disclaimer):
     body = "，".join(str(x).strip() for x in (offer.get("detail") or []) if str(x).strip())
 
     url = str(offer.get("booking_url") or "").strip()
-    link_clause = f"（訂房連結：{url}）" if url else ""
+    # The URL is half-width content, so it is delimited by spaces on both
+    # sides. Brackets are avoided here because a full-width bracket sitting
+    # flush against the URL leaves no boundary for link autodetection.
+    link_clause = f"，訂房連結 {url} " if url else ""
 
     sentence = (
-        f"{venue}「{offer['name_zh']}」{link_clause}："
+        f"{venue}「{offer['name_zh']}」{link_clause}，"
         f"{price_phrase(offer)}，"
         f"{body}，"
         f"{validity_phrase(offer)}。"
@@ -167,9 +170,9 @@ def build(data_file, style):
         sections.append(render(venue, offer, disclaimer))
         # plain-text length of this block, for the downstream size check
         _url = str(offer.get("booking_url") or "").strip()
-        _link = f"（訂房連結：{_url}）" if _url else ""
+        _link = f"，訂房連結 {_url} " if _url else ""
         plain = (
-            f"{venue}「{offer['name_zh']}」{_link}：{price_phrase(offer)}，"
+            f"{venue}「{offer['name_zh']}」{_link}，{price_phrase(offer)}，"
             + "，".join(str(x).strip() for x in (offer.get("detail") or []))
             + f"，{validity_phrase(offer)}。"
         )
