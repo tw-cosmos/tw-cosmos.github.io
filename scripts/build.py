@@ -97,7 +97,12 @@ def validity_phrase(offer):
 
 
 def render_narrative(venue, offer, disclaimer):
-    """One offer, one paragraph, opening with venue and offer name."""
+    """One offer, one paragraph, opening with venue and offer name.
+
+    A heading is emitted purely as a visual anchor for human maintenance.
+    The paragraph repeats the venue and offer name so that the text stays
+    self-describing even when the heading is not carried along.
+    """
     body = "，".join(str(x).strip() for x in (offer.get("detail") or []) if str(x).strip())
 
     sentence = (
@@ -107,7 +112,10 @@ def render_narrative(venue, offer, disclaimer):
         f"{validity_phrase(offer)}。"
     )
 
-    parts = [f"  <p>{esc(sentence)}</p>"]
+    parts = [
+        f"  <h2>{esc(offer['name_zh'])}</h2>",
+        f"  <p>{esc(sentence)}</p>",
+    ]
     if disclaimer:
         parts.append(f'  <p class="note">{esc(disclaimer)}</p>')
 
