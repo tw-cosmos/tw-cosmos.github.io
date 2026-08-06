@@ -1,0 +1,17 @@
+# Pages watched for content changes.
+#
+# Each entry produces one snapshot file at snapshots/<key>.txt.
+# Add a venue by appending an entry; nothing else needs to change.
+#
+#   key       file name for the snapshot, lowercase, no spaces
+#   label     name shown in the report
+#   url       page to read
+#   min_lines guard against reporting a load failure as a content wipe
+
+settle_ms: 5000
+
+sources:
+  - key: taipei-garden
+    label: 台北花園大酒店 促銷活動頁
+    url: https://www.taipeigarden.com.tw/promotions/
+    min_lines: 10

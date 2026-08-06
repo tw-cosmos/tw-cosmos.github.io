@@ -1,0 +1,64 @@
+name: Watch source pages
+
+# Every Monday 09:00 Taipei time (01:00 UTC).
+# Can also be triggered by hand from the Actions tab.
+on:
+  schedule:
+    - cron: "0 1 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install pyyaml playwright
+          playwright install --with-deps chromium
+
+      - name: Check sources
+        id: check
+        run: |
+          set +e
+          python scripts/watch_sources.py > report.txt 2>&1
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          cat report.txt
+
+      - name: Open issue when something changed
+        if: steps.check.outputs.exit_code != '0'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('report.txt', 'utf8');
+            const today = new Date().toISOString().slice(0, 10);
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Source change detected - ${today}`,
+              body: [
+                'Automated check found a difference between the live page and the stored snapshot.',
+                '',
+                'Verify against the source before editing any data file. Do not copy the diff directly.',
+                '',
+                report,
+              ].join('\n'),
+            });
+
+      - name: Commit updated snapshots
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add snapshots/
+          git diff --staged --quiet || git commit -m "Update source snapshots"
+          git push
