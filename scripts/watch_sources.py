@@ -73,6 +73,30 @@ def normalise(raw):
     return lines
 
 
+def scroll_through(page, poll_ms, max_steps=40):
+    """Walk the page from top to bottom, then back to the top.
+
+    Content below the fold is often rendered only once it enters the
+    viewport. A headless run stays where it lands, so without this the
+    capture silently omits whatever never scrolled into view -- which
+    looks identical to those items having been withdrawn upstream.
+    """
+    step = page.viewport_size["height"] if page.viewport_size else 800
+    position = 0
+    for _ in range(max_steps):
+        page.mouse.wheel(0, step)
+        page.wait_for_timeout(400)
+        height = page.evaluate("document.body.scrollHeight")
+        position += step
+        if position >= height:
+            break
+    # Let anything triggered by the last step finish, then return to the
+    # top so the captured text is in document order.
+    page.wait_for_timeout(poll_ms)
+    page.evaluate("window.scrollTo(0, 0)")
+    page.wait_for_timeout(400)
+
+
 def load_page(page, src, poll_ms, timeout_ms):
     """Open the page and wait until its text stops changing.
 
@@ -84,6 +108,8 @@ def load_page(page, src, poll_ms, timeout_ms):
     status = resp.status if resp else None
     if status != 200:
         return status, "", False
+
+    scroll_through(page, poll_ms)
 
     # Presence check only. It answers "did anything load at all", never
     # "did the right number of things load".
