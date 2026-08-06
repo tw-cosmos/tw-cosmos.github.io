@@ -31,9 +31,13 @@ except ImportError:
 # "list"      -> heading plus <ul><li>, kept for comparison only
 DEFAULT_STYLE = "narrative"
 
+# Wording is deliberately terse and unambiguous. A longer phrase such as
+# "本價格未含 10% 服務費，結帳時另計" gets abbreviated downstream to
+# "不含服務費", which reads as "no service charge applies" rather than
+# "a service charge is added". "另加" cannot be shortened into that reading.
 SERVICE_CHARGE = {
-    "included": "本價格已含 10% 服務費",
-    "excluded": "本價格未含 10% 服務費，結帳時另計",
+    "included": "已含 10% 服務費",
+    "excluded": "另加 10% 服務費",
 }
 
 CSS = """
