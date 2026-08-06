@@ -10,17 +10,26 @@ calling workflow can act on it.
 The script never edits data files or pages. Its only job is to tell a
 human that something upstream moved.
 
+Loading is confirmed by stability, not by a fixed delay and not by an
+expected item count: the page is polled until two consecutive reads are
+identical. A fixed sleep is unreliable because runner speed varies, and a
+half-loaded capture produces a snapshot that reports phantom changes next
+week. An expected count would be worse still, because the count itself is
+what we are watching for -- an offer being added or withdrawn upstream is
+the signal, not an error.
+
 Config lives in sources.yml next to this script.
 
 Usage:
     python scripts/watch_sources.py
-    python scripts/watch_sources.py --init     # first run, store baselines
+    python scripts/watch_sources.py --init     # rebuild baselines
 """
 
 import argparse
 import difflib
 import re
 import sys
+import time
 from pathlib import Path
 
 try:
@@ -64,11 +73,43 @@ def normalise(raw):
     return lines
 
 
-def fetch(page, url, settle_ms):
-    resp = page.goto(url, wait_until="networkidle", timeout=60000)
+def load_page(page, src, poll_ms, timeout_ms):
+    """Open the page and wait until its text stops changing.
+
+    Returns (status, text, settled). settled is False when the text never
+    stabilised, which the caller treats as a failed read rather than as a
+    content change, so a partial capture never overwrites a good snapshot.
+    """
+    resp = page.goto(src["url"], wait_until="networkidle", timeout=60000)
     status = resp.status if resp else None
-    page.wait_for_timeout(settle_ms)
-    return status, page.inner_text("body")
+    if status != 200:
+        return status, "", False
+
+    # Presence check only. It answers "did anything load at all", never
+    # "did the right number of things load".
+    pattern = src.get("expect_pattern")
+    regex = re.compile(pattern, re.I) if pattern else None
+
+    deadline = time.monotonic() + timeout_ms / 1000
+    previous = None
+    reads = 0
+
+    while time.monotonic() < deadline:
+        page.wait_for_timeout(poll_ms)
+        text = page.inner_text("body")
+        reads += 1
+
+        if text == previous:
+            # Two identical consecutive reads: the page has settled.
+            if regex and not regex.search(text):
+                out("    頁面已穩定但未出現預期內容，視為載入失敗")
+                return status, text, False
+            return status, text, True
+
+        previous = text
+
+    out(f"    等待逾時：內容持續變動（已讀取 {reads} 次）")
+    return status, previous or "", False
 
 
 def main():
@@ -82,7 +123,8 @@ def main():
 
     config = yaml.safe_load(CONFIG.read_text(encoding="utf-8")) or {}
     sources = config.get("sources") or []
-    settle_ms = int(config.get("settle_ms", 5000))
+    poll_ms = int(config.get("poll_ms", 2000))
+    timeout_ms = int(config.get("load_timeout_ms", 45000))
 
     if not sources:
         sys.exit("No sources configured.")
@@ -99,11 +141,11 @@ def main():
             for src in sources:
                 key = src["key"]
                 label = src.get("label", key)
-                url = src["url"]
                 snap_path = SNAPSHOT_DIR / f"{key}.txt"
+                out(f"讀取 {label} ...")
 
                 try:
-                    status, raw = fetch(page, url, settle_ms)
+                    status, raw, settled = load_page(page, src, poll_ms, timeout_ms)
                 except Exception as err:
                     failed.append((label, f"讀取失敗：{err}"))
                     continue
@@ -112,10 +154,13 @@ def main():
                     failed.append((label, f"HTTP {status}"))
                     continue
 
+                if not settled:
+                    # Never overwrite a good baseline with a partial read.
+                    failed.append((label, "頁面未完整載入，本次不比對、不更新快照"))
+                    continue
+
                 lines = normalise(raw)
 
-                # A page that suddenly returns almost nothing is far more
-                # likely to be a loading failure than a real content wipe.
                 if len(lines) < int(src.get("min_lines", 5)):
                     failed.append((label, f"內容過少（{len(lines)} 行），可能未載入完成"))
                     continue
@@ -136,7 +181,7 @@ def main():
                     previous, lines, lineterm="", n=1,
                     fromfile="上次", tofile="本次",
                 ))
-                changed.append((label, url, diff))
+                changed.append((label, src["url"], diff))
                 snap_path.write_text(current + "\n", encoding="utf-8")
         finally:
             browser.close()
@@ -167,7 +212,6 @@ def main():
     if not changed and not failed:
         out("全部無異動。")
 
-    # Non-zero exit tells the workflow that a human needs to look.
     sys.exit(1 if (changed or failed) else 0)
 
 
