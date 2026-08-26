@@ -24,6 +24,10 @@ projects:
   valid_to: 2027.06.30
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=Love-Our-Environment&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
+  hashtags:
+  - 住房優惠
+  - 住房專案
+  - 訂房優惠
 - id: 2
   name_zh: 官網優惠專案（不含早）
   name_en: ''
@@ -37,6 +41,10 @@ projects:
   valid_to: 2027.06.30
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=Best-Available-Rate&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
+  hashtags:
+  - 住房優惠
+  - 住房專案
+  - 訂房優惠
 - id: 3
   name_zh: 官網優惠專案（含早餐）
   name_en: ''
@@ -50,6 +58,10 @@ projects:
   valid_to: 2027.06.30
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=Best-Available-Rate-With-BF&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
+  hashtags:
+  - 住房優惠
+  - 住房專案
+  - 訂房優惠
 - id: 4
   name_zh: 尊寵禮遇 Happy Hour 一泊二食住房優惠
   name_en: ''
@@ -65,6 +77,10 @@ projects:
   valid_to: 2027.06.30
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2024-Happy-Hour&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
+  hashtags:
+  - 住房優惠
+  - 住房專案
+  - 訂房優惠
 - id: 5
   name_zh: Cosmos CLUB 會員專屬禮遇
   name_en: ''
@@ -82,6 +98,10 @@ projects:
   valid_to: 2026.12.18
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2023-Cosmos-CLUB-Members-Only&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
+  hashtags:
+  - 住房優惠
+  - 住房專案
+  - 訂房優惠
 - id: 6
   name_zh: 雙鐵旅遊、低碳同行住房專案
   name_en: ''
@@ -96,6 +116,10 @@ projects:
   valid_to: 2026.09.30
   valid_note: 不適用日 2026.09.25 - 2026.09.28
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2026-railway&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
+  hashtags:
+  - 住房優惠
+  - 住房專案
+  - 訂房優惠
 - id: 7
   name_zh: 輕奢寵愛套房住宿優惠
   name_en: ''
@@ -113,3 +137,7 @@ projects:
   valid_to: 2027.06.30
   valid_note: 不適用日 2026.12.30 - 2027.01.02
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=light-luxury&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
+  hashtags:
+  - 住房優惠
+  - 住房專案
+  - 訂房優惠
