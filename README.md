@@ -13,5 +13,6 @@ scripts/       生成腳本
 ## 生成頁面
 
 ```bash
+pip install -r requirements.txt  # 安裝依賴
 python scripts/build.py
 ```
