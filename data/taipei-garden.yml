@@ -5,7 +5,7 @@ property:
   page_title: 台北花園大酒店、住宿專案
   page_description: 台北花園大酒店住宿專案資訊，含專案內容與適用期間。
   price_disclaimer: 價格為參考起始價，實際房價依訂房日期與房型浮動，請以線上訂房系統顯示為準。
-  verified_date: 2026.07.29
+  verified_date: 2026.08.26
   verified_source: 官網促銷活動頁
 projects:
 - id: 1
@@ -27,7 +27,7 @@ projects:
 - id: 2
   name_zh: 官網優惠專案（不含早）
   name_en: ''
-  price_from: 3545
+  price_from: 3090
   price_unit: 每房每晚
   service_charge: excluded
   detail:
@@ -40,7 +40,7 @@ projects:
 - id: 3
   name_zh: 官網優惠專案（含早餐）
   name_en: ''
-  price_from: 3999
+  price_from: 3545
   price_unit: 每房每晚
   service_charge: excluded
   detail:
@@ -53,7 +53,7 @@ projects:
 - id: 4
   name_zh: 尊寵禮遇 Happy Hour 一泊二食住房優惠
   name_en: ''
-  price_from: 4363
+  price_from: 3908
   price_unit: 每房每晚
   service_charge: excluded
   detail:
@@ -68,7 +68,7 @@ projects:
 - id: 5
   name_zh: Cosmos CLUB 會員專屬禮遇
   name_en: ''
-  price_from: 4399
+  price_from: 3899
   price_unit: 每房每晚
   service_charge: included
   detail:
@@ -85,7 +85,7 @@ projects:
 - id: 6
   name_zh: 雙鐵旅遊、低碳同行住房專案
   name_en: ''
-  price_from: 4454
+  price_from: 4181
   price_unit: 每房每晚
   service_charge: excluded
   detail:
