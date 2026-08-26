@@ -58,7 +58,6 @@ ul { margin: .4rem 0; padding-left: 1.3rem; }
 section { margin-bottom: 2.2rem; }
 a { color: #0a5; }
 .note { color: #666; font-size: .9rem; }
-.tags { color: #666; font-size: .9rem; }
 hr { border: 0; border-top: 1px solid #eee; margin: 2.5rem 0 1.5rem; }
 """
 
@@ -101,8 +100,13 @@ def validity_phrase(offer):
     return text
 
 
-def hashtag_line(offer):
-    """Space-separated "#tag" line built from the offer's hashtags list."""
+def hashtag_suffix(offer):
+    """Space-separated "#tag" run appended to the end of the narrative.
+
+    Kept inside the narrative paragraph rather than emitted as its own
+    block, so that a chunker splitting on block boundaries cannot detach
+    the tags from the offer they describe.
+    """
     tags = [
         str(t).strip().lstrip("#")
         for t in (offer.get("hashtags") or [])
@@ -126,20 +130,22 @@ def render_narrative(venue, offer, disclaimer):
     # flush against the URL leaves no boundary for link autodetection.
     link_clause = f"，訂房連結 {url} " if url else ""
 
+    # The tag run is half-width content, so it is separated from the
+    # closing full-width period by one half-width space.
+    tags = hashtag_suffix(offer)
+    tag_clause = f" {tags}" if tags else ""
+
     sentence = (
         f"{venue}「{offer['name_zh']}」{link_clause}，"
         f"{price_phrase(offer)}，"
         f"{body}，"
-        f"{validity_phrase(offer)}。"
+        f"{validity_phrase(offer)}。{tag_clause}"
     )
 
     parts = [
         f"  <h2>{esc(offer['name_zh'])}</h2>",
         f"  <p>{esc(sentence)}</p>",
     ]
-    tags = hashtag_line(offer)
-    if tags:
-        parts.append(f'  <p class="tags">{esc(tags)}</p>')
     if disclaimer:
         parts.append(f'  <p class="note">{esc(disclaimer)}</p>')
     if url:
@@ -194,9 +200,9 @@ def build(data_file, style):
             + "，".join(str(x).strip() for x in (offer.get("detail") or []))
             + f"，{validity_phrase(offer)}。"
         )
-        _tags = hashtag_line(offer)
+        _tags = hashtag_suffix(offer)
         if _tags:
-            plain += '\n' + _tags
+            plain += " " + _tags
         lengths.append((offer.get("id"), len(plain)))
 
     if not sections:
