@@ -1,3 +1,4 @@
+# generated from Notion, do not edit
 property:
   slug: taipei-garden
   name_zh: 台北花園大酒店
@@ -5,96 +6,18 @@ property:
   page_title: 台北花園大酒店、住宿專案
   page_description: 台北花園大酒店住宿專案資訊，含專案內容與適用期間。
   price_disclaimer: 價格為參考起始價，實際房價依訂房日期與房型浮動，請以線上訂房系統顯示為準。
-  verified_date: 2026.08.26
-  verified_source: 官網促銷活動頁
+  verified_date: 2026.09.14
+  verified_source: Notion 監控庫（核實閘）
 projects:
-- id: 1
-  name_zh: 環保愛地球住房優惠（無障礙安心住房國人限定）
-  name_en: ''
-  price_from: 3045
-  price_unit: 每房每晚
-  service_charge: included
-  detail:
-  - 雅緻客房（愛心房無障礙）雙人住宿一晚，不含早餐
-  - 每房贈送「旅艋舺 遊西門」古蹟紙雕乙份（款式隨機，贈完為止）
-  - 免費柑仔鋪取用乙次
-  - 限持國民身分證、台灣護照或外僑居留證者入住，入住時需出示本人有效證件
-  - 每日限量 3 間，不得與其他優惠合併使用，不適用房型升等
-  - 續住期間不提供打掃、更換毛巾及床組服務，不提供 Mini bar 與一次性盥洗用品
-  valid_to: 2027.06.30
-  valid_note: ''
-  booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=Love-Our-Environment&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
-  hashtags:
-  - 住房優惠
-  - 住房專案
-  - 訂房優惠
-- id: 2
-  name_zh: 官網優惠專案（不含早）
-  name_en: ''
-  price_from: 3090
-  price_unit: 每房每晚
-  service_charge: excluded
-  detail:
-  - 不含早餐
-  - 每房贈送「旅艋舺 遊西門」古蹟紙雕乙份（款式隨機，贈完為止）
-  - 免費柑仔鋪取用乙次
-  valid_to: 2027.06.30
-  valid_note: ''
-  booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=Best-Available-Rate&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
-  hashtags:
-  - 住房優惠
-  - 住房專案
-  - 訂房優惠
-- id: 3
-  name_zh: 官網優惠專案（含早餐）
-  name_en: ''
-  price_from: 3545
-  price_unit: 每房每晚
-  service_charge: excluded
-  detail:
-  - 包含早餐
-  - 每房贈送「旅艋舺 遊西門」古蹟紙雕乙份（款式隨機，贈完為止）
-  - 免費柑仔鋪取用乙次
-  valid_to: 2027.06.30
-  valid_note: ''
-  booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=Best-Available-Rate-With-BF&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
-  hashtags:
-  - 住房優惠
-  - 住房專案
-  - 訂房優惠
-- id: 4
-  name_zh: 尊寵禮遇 Happy Hour 一泊二食住房優惠
-  name_en: ''
-  price_from: 3908
-  price_unit: 每房每晚
-  service_charge: excluded
-  detail:
-  - 依房型人數提供隔日早餐
-  - 入住期間享花園饗聚廚房 Happy Hour（依房型人數贈送，供應時間 15:00 - 17:00）
-  - 每房贈送「旅艋舺 遊西門」古蹟紙雕乙份（款式隨機，贈完為止）
-  - 免費柑仔鋪取用乙次
-  - 適用 Cosmos CLUB 會員消費累點
-  valid_to: 2027.06.30
-  valid_note: ''
-  booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2024-Happy-Hour&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
-  hashtags:
-  - 住房優惠
-  - 住房專案
-  - 訂房優惠
-- id: 5
+- id: 2023-Cosmos-CLUB-Members-Only
   name_zh: Cosmos CLUB 會員專屬禮遇
   name_en: ''
-  price_from: 3899
+  price_from: 3699
   price_unit: 每房每晚
   service_charge: included
   detail:
-  - 包含早餐
-  - 註冊 Cosmos CLUB 會員，預訂享 9 折優惠
-  - 每房贈送「旅艋舺 遊西門」古蹟紙雕乙份（款式隨機，贈完為止）
-  - 免費柑仔鋪取用乙次
-  - 僅限會員本人預訂，訂房時於「特殊需求」欄位填入會員編號
-  - 無法出示會員身分或不符資格者，須現場補足原房費價差
-  - 不得與其他優惠合併使用，可與會員禮遇合併
+  - 專屬 Cosmos CLUB 會員的 9 折訂房優惠，含自助早餐，訂房時須填入會員編號，現場無法出示資格者需補足差額。適合已加入天成旅館集團會員計畫的常旅客
+  - 適用條件：含早餐、需會員、9 折優惠、會員專屬
   valid_to: 2026.12.18
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2023-Cosmos-CLUB-Members-Only&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
@@ -102,42 +25,193 @@ projects:
   - 住房優惠
   - 住房專案
   - 訂房優惠
-- id: 6
+  valid_from: 2024.12.20
+  category: 會員專案
+  room: Premier-Double
+  meal: buffet Breakfast
+  summary: 專屬Cosmos CLUB會員的9折訂房優惠，含自助早餐，訂房時須填入會員編號，現場無法出示資格者需補足差額。適合已加入天成旅館集團會員計畫的常旅客。
+  tags:
+  - 含早餐
+  - 需會員
+  - 9 折優惠
+  - 會員專屬
+  image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/edee8dfe05cdc92c637c9ec737a5c409.jpg
+  verified_date: 2026.09.14
+  price_source: 官網起價
+- id: 2026-railway
   name_zh: 雙鐵旅遊、低碳同行住房專案
   name_en: ''
-  price_from: 4181
+  price_from: 3999
   price_unit: 每房每晚
   service_charge: excluded
   detail:
-  - 依房型人數提供隔日早餐
-  - 持入住期間台灣高鐵或台灣鐵路車票票根，住房享 96 折優惠
-  - 免費柑仔鋪取用乙次
-  - 不得與其他優惠合併使用
-  valid_to: 2026.09.30
-  valid_note: 不適用日 2026.09.25 - 2026.09.28
+  - 持台灣高鐵或台鐵票根入住可享 96 折優惠，並含隔日早餐及免費柑仔鋪取用，適合搭乘大眾運輸的低碳旅遊族。此專案不得與其他優惠合併使用，但可累積 Cosmos CLUB 會員點數
+  - 適用條件：含早餐、可累點、雙鐵優惠、不可併用、有排除日期
+  valid_to: 2026.12.18
+  valid_note: 有排除日期
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2026-railway&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
   hashtags:
   - 住房優惠
   - 住房專案
   - 訂房優惠
-- id: 7
+  valid_from: 2026.03.17
+  category: 環保專案
+  room: Luxury-Double
+  meal: buffet Breakfast
+  summary: 持台灣高鐵或台鐵票根入住可享96折優惠，並含隔日早餐及免費柑仔鋪取用，適合搭乘大眾運輸的低碳旅遊族。此專案不得與其他優惠合併使用，但可累積Cosmos CLUB會員點數。
+  tags:
+  - 含早餐
+  - 可累點
+  - 雙鐵優惠
+  - 不可併用
+  - 有排除日期
+  image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/f362630efb9961df29ef370e9d05a313.jpg
+  verified_date: 2026.09.14
+  price_source: 官網起價
+- id: 2024-Happy-Hour
+  name_zh: 尊寵禮遇 Happy Hour 一泊二食住房優惠
+  name_en: ''
+  price_from: 3726
+  price_unit: 每房每晚
+  service_charge: excluded
+  detail:
+  - 含自助早餐，並於下午三點至五點提供 Happy Hour 餐飲，另贈柑仔鋪零食、免費健身房及西門古蹟紙雕。適合想在官網訂房同時享有下午茶時光的旅客，可累積 Cosmos CLUB 點數
+  - 適用條件：一泊二食、Happy Hour、可累點、贈伴手禮
+  valid_to: 2027.06.30
+  valid_note: ''
+  booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2024-Happy-Hour&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
+  hashtags:
+  - 住房優惠
+  - 住房專案
+  - 訂房優惠
+  valid_from: ''
+  category: 享樂專案
+  room: Premier-Double
+  meal: buffet Breakfast
+  summary: 含自助早餐，並於下午三點至五點提供Happy Hour餐飲，另贈柑仔鋪零食、免費健身房及西門古蹟紙雕。適合想在官網訂房同時享有下午茶時光的旅客，可累積Cosmos CLUB點數。
+  tags:
+  - 一泊二食
+  - Happy Hour
+  - 可累點
+  - 贈伴手禮
+  image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/655bc2ae48133c71f0a29daa8f06a14a.jpg
+  verified_date: 2026.09.14
+  price_source: 官網起價
+- id: Best-Available-Rate
+  name_zh: 官網優惠專案（不含早）
+  name_en: ''
+  price_from: 2908
+  price_unit: 每房每晚
+  service_charge: excluded
+  detail:
+  - 不含早餐的官網訂房優惠，附贈免費健身房、柑仔鋪零食取用及西門古蹟紙雕乙份，並提供免費停車（車位有限）。適合自由行、不需餐食服務的旅客
+  - 適用條件：不含早餐、免費停車、贈伴手禮、免費健身房
+  valid_to: 2027.06.30
+  valid_note: ''
+  booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=Best-Available-Rate&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
+  hashtags:
+  - 住房優惠
+  - 住房專案
+  - 訂房優惠
+  valid_from: ''
+  category: 一般專案
+  room: Premier-Double
+  meal: ''
+  summary: 不含早餐的官網訂房優惠，附贈免費健身房、柑仔鋪零食取用及西門古蹟紙雕乙份，並提供免費停車（車位有限）。適合自由行、不需餐食服務的旅客。
+  tags:
+  - 不含早餐
+  - 免費停車
+  - 贈伴手禮
+  - 免費健身房
+  image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/f3fb9a05e4e225781a8262bbcdb799db.jpg
+  verified_date: 2026.09.14
+  price_source: 官網起價
+- id: Best-Available-Rate-With-BF
+  name_zh: 官網優惠專案（含早餐）
+  name_en: ''
+  price_from: 3363
+  price_unit: 每房每晚
+  service_charge: excluded
+  detail:
+  - 官網訂房含自助早餐，並附免費健身房、柑仔鋪零食取用及西門古蹟紙雕，提供免費停車（車位有限）。適合想享用早餐且無需額外加購的旅客
+  - 適用條件：含早餐、免費停車、贈伴手禮、免費健身房
+  valid_to: 2027.06.30
+  valid_note: ''
+  booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=Best-Available-Rate-With-BF&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
+  hashtags:
+  - 住房優惠
+  - 住房專案
+  - 訂房優惠
+  valid_from: ''
+  category: 一般專案
+  room: Premier-Double
+  meal: buffet Breakfast
+  summary: 官網訂房含自助早餐，並附免費健身房、柑仔鋪零食取用及西門古蹟紙雕，提供免費停車（車位有限）。適合想享用早餐且無需額外加購的旅客。
+  tags:
+  - 含早餐
+  - 免費停車
+  - 贈伴手禮
+  - 免費健身房
+  image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/5f618c767a9c08f9cbf7cf113773ba0f.jpg
+  verified_date: 2026.09.14
+  price_source: 官網起價
+- id: Love-Our-Environment
+  name_zh: 環保愛地球住房優惠（無障礙安心住房國人限定）
+  name_en: ''
+  price_from: 3045
+  price_unit: 每房每晚
+  service_charge: included
+  detail:
+  - 限持國民身分證、台灣護照或外僑居留證的國人入住無障礙客房，不含早餐，每日限量 3 間且不得與其他優惠併用。適合有無障礙需求或行動不便的本國旅客
+  - 適用條件：國人限定、無障礙客房、不含早餐、限量供應、不可併用
+  valid_to: 2027.06.30
+  valid_note: 國人限定、限量供應
+  booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=Love-Our-Environment&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
+  hashtags:
+  - 住房優惠
+  - 住房專案
+  - 訂房優惠
+  valid_from: ''
+  category: 環保專案
+  room: Premier-Double
+  meal: ''
+  summary: 限持國民身分證、台灣護照或外僑居留證的國人入住無障礙客房，不含早餐，每日限量3間且不得與其他優惠併用。適合有無障礙需求或行動不便的本國旅客。
+  tags:
+  - 國人限定
+  - 無障礙客房
+  - 不含早餐
+  - 限量供應
+  - 不可併用
+  image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/40428228fc47b2cc7643952d7e0ca3a8.jpg
+  verified_date: 2026.09.14
+  price_source: 官網起價
+- id: light-luxury
   name_zh: 輕奢寵愛套房住宿優惠
   name_en: ''
   price_from: 9088
   price_unit: 每房每晚
   service_charge: included
   detail:
-  - 豪華套房或花園套房，依房型人數提供隔日早餐
-  - 入住當日享花園饗聚廚房 Happy Hour（依房型人數贈送，供應時間 15:00 - 17:00）
-  - 每房加贈比比家族沐浴泡澡球禮盒乙盒
-  - 入住免費贈送紅酒每房乙瓶
-  - 每房贈送「旅艋舺 遊西門」古蹟紙雕乙份（款式隨機，贈完為止）
-  - 免費柑仔鋪取用乙次
-  - 不得與其他優惠合併使用
+  - 套房等級專案，含自助早餐、Happy Hour 下午茶、入住紅酒一瓶及泡澡球禮盒，2026/12/30–2027/1/2 不適用且不得與其他優惠併用。適合想在套房享受精緻體驗的旅客
+  - 適用條件：套房、含早餐、下午茶、贈品、不可併用
   valid_to: 2027.06.30
-  valid_note: 不適用日 2026.12.30 - 2027.01.02
+  valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=light-luxury&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
   hashtags:
   - 住房優惠
   - 住房專案
   - 訂房優惠
+  valid_from: ''
+  category: 享樂專案
+  room: Deluxe-Suite
+  meal: buffet Breakfast
+  summary: 套房等級專案，含自助早餐、Happy Hour下午茶、入住紅酒一瓶及泡澡球禮盒，2026/12/30–2027/1/2不適用且不得與其他優惠併用。適合想在套房享受精緻體驗的旅客。
+  tags:
+  - 套房
+  - 含早餐
+  - 下午茶
+  - 贈品
+  - 不可併用
+  image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/c203930e7137642c29be7b7a6eae45a2.jpg
+  verified_date: 2026.09.14
+  price_source: 官網起價
