@@ -1,10 +1,11 @@
 name: Sync Notion to taipei-garden
 
-# Every day 09:30 Taipei time (01:30 UTC).
+# Every day 09:47 Taipei time (01:47 UTC). Off the hour and half-hour
+# on purpose: those slots queue behind everyone else's cron jobs.
 # Can also be triggered by hand from the Actions tab.
 on:
   schedule:
-    - cron: "30 1 * * *"
+    - cron: "47 1 * * *"
   workflow_dispatch:
 
 permissions:
