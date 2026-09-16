@@ -6,7 +6,7 @@ property:
   page_title: 台北花園大酒店、住宿專案
   page_description: 台北花園大酒店住宿專案資訊，含專案內容與適用期間。
   price_disclaimer: 價格為參考起始價，實際房價依訂房日期與房型浮動，請以線上訂房系統顯示為準。
-  verified_date: 2026.09.14
+  verified_date: 2026.09.16
   verified_source: Notion 監控庫（核實閘）
 projects:
 - id: 2023-Cosmos-CLUB-Members-Only
@@ -67,6 +67,35 @@ projects:
   - 有排除日期
   image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/f362630efb9961df29ef370e9d05a313.jpg
   verified_date: 2026.09.14
+  price_source: 官網起價
+- id: 2024-Happy-Hour
+  name_zh: 尊寵禮遇 Happy Hour 一泊二食住房優惠
+  name_en: ''
+  price_from: 3726
+  price_unit: 每房每晚
+  service_charge: excluded
+  detail:
+  - 含自助早餐，並於下午三點至五點提供 Happy Hour 餐飲，另贈柑仔鋪零食、免費健身房及西門古蹟紙雕。適合想在官網訂房同時享有下午茶時光的旅客，可累積 Cosmos CLUB 點數
+  - 適用條件：一泊二食、Happy Hour、可累點、贈伴手禮
+  valid_to: 2027.06.30
+  valid_note: ''
+  booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2024-Happy-Hour&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
+  hashtags:
+  - 住房優惠
+  - 住房專案
+  - 訂房優惠
+  valid_from: ''
+  category: 享樂專案
+  room: Premier-Double
+  meal: buffet Breakfast
+  summary: 含自助早餐，並於下午三點至五點提供Happy Hour餐飲，另贈柑仔鋪零食、免費健身房及西門古蹟紙雕。適合想在官網訂房同時享有下午茶時光的旅客，可累積Cosmos CLUB點數。
+  tags:
+  - 一泊二食
+  - Happy Hour
+  - 可累點
+  - 贈伴手禮
+  image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/655bc2ae48133c71f0a29daa8f06a14a.jpg
+  verified_date: 2026.09.16
   price_source: 官網起價
 - id: Best-Available-Rate
   name_zh: 官網優惠專案（不含早）
