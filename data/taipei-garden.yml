@@ -6,7 +6,7 @@ property:
   page_title: 台北花園大酒店、住宿專案
   page_description: 台北花園大酒店住宿專案資訊，含專案內容與適用期間。
   price_disclaimer: 價格為參考起始價，實際房價依訂房日期與房型浮動，請以線上訂房系統顯示為準。
-  verified_date: 2026.09.21
+  verified_date: 2026.09.24
   verified_source: Notion 監控庫（核實閘）
 projects:
 - id: 2026TDPASS
@@ -39,35 +39,6 @@ projects:
   image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/3ed3666c1104ab7915f232218673bc6c.jpg
   verified_date: 2026.09.21
   price_source: 官網起價
-- id: 2023-Cosmos-CLUB-Members-Only
-  name_zh: Cosmos CLUB 會員專屬禮遇
-  name_en: ''
-  price_from: 3699
-  price_unit: 每房每晚
-  service_charge: included
-  detail:
-  - 專屬 Cosmos CLUB 會員的 9 折訂房優惠，含自助早餐，訂房時須填入會員編號，現場無法出示資格者需補足差額。適合已加入天成旅館集團會員計畫的常旅客
-  - 適用條件：含早餐、需會員、9 折優惠、會員專屬
-  valid_to: 2026.12.18
-  valid_note: ''
-  booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2023-Cosmos-CLUB-Members-Only&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
-  hashtags:
-  - 住房優惠
-  - 住房專案
-  - 訂房優惠
-  valid_from: 2024.12.20
-  category: 會員專案
-  room: Premier-Double
-  meal: buffet Breakfast
-  summary: 專屬Cosmos CLUB會員的9折訂房優惠，含自助早餐，訂房時須填入會員編號，現場無法出示資格者需補足差額。適合已加入天成旅館集團會員計畫的常旅客。
-  tags:
-  - 含早餐
-  - 需會員
-  - 9 折優惠
-  - 會員專屬
-  image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/edee8dfe05cdc92c637c9ec737a5c409.jpg
-  verified_date: 2026.09.14
-  price_source: 官網起價
 - id: 2026-railway
   name_zh: 雙鐵旅遊、低碳同行住房專案
   name_en: ''
@@ -97,6 +68,35 @@ projects:
   - 有排除日期
   image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/f362630efb9961df29ef370e9d05a313.jpg
   verified_date: 2026.09.14
+  price_source: 官網起價
+- id: 2023-Cosmos-CLUB-Members-Only
+  name_zh: Cosmos CLUB 會員專屬禮遇
+  name_en: ''
+  price_from: 3699
+  price_unit: 每房每晚
+  service_charge: included
+  detail:
+  - 專屬 Cosmos CLUB 會員的 9 折訂房優惠，含自助早餐，訂房時須填入會員編號，現場無法出示資格者需補足差額。適合已加入天成旅館集團會員計畫的常旅客
+  - 適用條件：含早餐、需會員、9 折優惠、會員專屬
+  valid_to: 2026.12.31
+  valid_note: ''
+  booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2023-Cosmos-CLUB-Members-Only&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
+  hashtags:
+  - 住房優惠
+  - 住房專案
+  - 訂房優惠
+  valid_from: 2024.12.20
+  category: 會員專案
+  room: Premier-Double
+  meal: buffet Breakfast
+  summary: 專屬Cosmos CLUB會員的9折訂房優惠，含自助早餐，訂房時須填入會員編號，現場無法出示資格者需補足差額。適合已加入天成旅館集團會員計畫的常旅客。
+  tags:
+  - 含早餐
+  - 需會員
+  - 9 折優惠
+  - 會員專屬
+  image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/edee8dfe05cdc92c637c9ec737a5c409.jpg
+  verified_date: 2026.09.24
   price_source: 官網起價
 - id: 2024-Happy-Hour
   name_zh: 尊寵禮遇 Happy Hour 一泊二食住房優惠
