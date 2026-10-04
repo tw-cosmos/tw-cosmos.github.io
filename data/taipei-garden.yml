@@ -16,8 +16,8 @@ projects:
   price_unit: 每房每晚
   service_charge: excluded
   detail:
-  - 持 2026 年大巨蛋演唱會或賽事門票、週一至週四入住可享官網價九折，含早餐、健身房、柑仔鋪，不可與其他優惠併用，適合看演唱會或賽事的平日旅客
-  - 適用條件：大巨蛋票根、含早餐、限平日、九折優惠、可累點
+  - 須持 2026 年大巨蛋演唱會或賽事門票，且限週一至週四入住，享九折優惠並含早餐，不可與其他優惠合併使用，但可累積 Cosmos CLUB 點數。適合前往大巨蛋活動並安排平日住宿的旅客
+  - 適用條件：含早餐、限平日、需票券、可累點、不可併用其他優惠
   valid_to: 2026.12.17
   valid_note: 限平日
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2026TDPASS&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
@@ -29,13 +29,13 @@ projects:
   category: 一般專案
   room: Premier-Double
   meal: buffet Breakfast
-  summary: 持2026年大巨蛋演唱會或賽事門票、週一至週四入住可享官網價九折，含早餐、健身房、柑仔鋪，不可與其他優惠併用，適合看演唱會或賽事的平日旅客。
+  summary: 須持2026年大巨蛋演唱會或賽事門票，且限週一至週四入住，享九折優惠並含早餐，不可與其他優惠合併使用，但可累積Cosmos CLUB點數。適合前往大巨蛋活動並安排平日住宿的旅客。
   tags:
-  - 大巨蛋票根
   - 含早餐
   - 限平日
-  - 九折優惠
+  - 需票券
   - 可累點
+  - 不可併用其他優惠
   image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/3ed3666c1104ab7915f232218673bc6c.jpg
   verified_date: 2026.10.03
   price_source: 官網起價
@@ -76,8 +76,8 @@ projects:
   price_unit: 每房每晚
   service_charge: included
   detail:
-  - 限 Cosmos CLUB 會員本人預訂，享九折優惠並含早餐，訂房須填入會員編號，無法出示會員資格者需現場補差額，適合已是天成會員的住客
-  - 適用條件：含早餐、需會員、九折優惠
+  - 僅限 Cosmos CLUB 會員預訂，享 9 折優惠並含早餐，須於訂房時填入會員編號，無法出示會員身份者須現場補差額。適合已加入會員、希望以優惠價含餐入住的旅客
+  - 適用條件：含早餐、需會員、9 折優惠
   valid_to: 2026.12.31
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2023-Cosmos-CLUB-Members-Only&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
@@ -89,11 +89,11 @@ projects:
   category: 會員專案
   room: Premier-Double
   meal: buffet Breakfast
-  summary: 限Cosmos CLUB會員本人預訂，享九折優惠並含早餐，訂房須填入會員編號，無法出示會員資格者需現場補差額，適合已是天成會員的住客。
+  summary: 僅限Cosmos CLUB會員預訂，享9折優惠並含早餐，須於訂房時填入會員編號，無法出示會員身份者須現場補差額。適合已加入會員、希望以優惠價含餐入住的旅客。
   tags:
   - 含早餐
   - 需會員
-  - 九折優惠
+  - 9 折優惠
   image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/edee8dfe05cdc92c637c9ec737a5c409.jpg
   verified_date: 2026.10.03
   price_source: 官網起價
@@ -104,8 +104,8 @@ projects:
   price_unit: 每房每晚
   service_charge: excluded
   detail:
-  - 入住期間享 15:00–17:00 Happy Hour 餐飲招待，另含隔日早餐、健身房、柑仔鋪及西門古蹟紙雕禮品，可累積 Cosmos CLUB 點數，適合想享受豐富餐飲體驗的住客
-  - 適用條件：一泊二食、Happy Hour、含早餐、可累點、贈紙雕禮品
+  - 含早餐及 Happy Hour（15:00–17:00），附贈西門古蹟紙雕與柑仔鋪取用乙次，適用 Cosmos CLUB 會員累點。適合希望一泊二食並享有多項設施與文化禮遇的旅客
+  - 適用條件：含早餐、Happy Hour 下午茶、一泊二食、可累點、贈紙雕
   valid_to: 2027.06.30
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2024-Happy-Hour&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
@@ -117,13 +117,13 @@ projects:
   category: 享樂專案
   room: Premier-Double
   meal: buffet Breakfast
-  summary: 入住期間享15:00–17:00 Happy Hour餐飲招待，另含隔日早餐、健身房、柑仔鋪及西門古蹟紙雕禮品，可累積Cosmos CLUB點數，適合想享受豐富餐飲體驗的住客。
+  summary: 含早餐及Happy Hour（15:00–17:00），附贈西門古蹟紙雕與柑仔鋪取用乙次，適用Cosmos CLUB會員累點。適合希望一泊二食並享有多項設施與文化禮遇的旅客。
   tags:
-  - 一泊二食
-  - Happy Hour
   - 含早餐
+  - Happy Hour 下午茶
+  - 一泊二食
   - 可累點
-  - 贈紙雕禮品
+  - 贈紙雕
   image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/655bc2ae48133c71f0a29daa8f06a14a.jpg
   verified_date: 2026.10.03
   price_source: 官網起價
@@ -134,8 +134,8 @@ projects:
   price_unit: 每房每晚
   service_charge: excluded
   detail:
-  - 含免費網路、健身房、柑仔鋪及西門古蹟紙雕禮品，並可享停車場（位有限）及桌遊加購優惠，適合想彈性不含早餐入住西門町的旅客
-  - 適用條件：不含早餐、免費停車、贈紙雕禮品
+  - 含稅房價，贈送健身房使用、柑仔鋪取用乙次及西門古蹟紙雕，停車位有限不保留，不含早餐。適合自由探索西門、萬華一帶的旅客
+  - 適用條件：不含早餐、贈紙雕、健身房、免費停車
   valid_to: 2027.06.30
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=Best-Available-Rate&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
@@ -147,11 +147,12 @@ projects:
   category: 一般專案
   room: Premier-Double
   meal: ''
-  summary: 含免費網路、健身房、柑仔鋪及西門古蹟紙雕禮品，並可享停車場（位有限）及桌遊加購優惠，適合想彈性不含早餐入住西門町的旅客。
+  summary: 含稅房價，贈送健身房使用、柑仔鋪取用乙次及西門古蹟紙雕，停車位有限不保留，不含早餐。適合自由探索西門、萬華一帶的旅客。
   tags:
   - 不含早餐
+  - 贈紙雕
+  - 健身房
   - 免費停車
-  - 贈紙雕禮品
   image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/f3fb9a05e4e225781a8262bbcdb799db.jpg
   verified_date: 2026.10.03
   price_source: 官網起價
@@ -162,8 +163,8 @@ projects:
   price_unit: 每房每晚
   service_charge: excluded
   detail:
-  - 含自助早餐、免費網路、健身房、柑仔鋪及西門古蹟紙雕禮品，並提供有限停車場及桌遊加購優惠，適合想含早餐入住西門町的旅客
-  - 適用條件：含早餐、免費停車、贈紙雕禮品
+  - 含早餐及稅，贈健身房使用、柑仔鋪取用乙次及西門古蹟紙雕，停車位有限不保留。適合希望享有早餐與周邊文化體驗的旅客
+  - 適用條件：含早餐、贈紙雕、健身房、免費停車
   valid_to: 2027.06.30
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=Best-Available-Rate-With-BF&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
@@ -175,11 +176,12 @@ projects:
   category: 一般專案
   room: Premier-Double
   meal: buffet Breakfast
-  summary: 含自助早餐、免費網路、健身房、柑仔鋪及西門古蹟紙雕禮品，並提供有限停車場及桌遊加購優惠，適合想含早餐入住西門町的旅客。
+  summary: 含早餐及稅，贈健身房使用、柑仔鋪取用乙次及西門古蹟紙雕，停車位有限不保留。適合希望享有早餐與周邊文化體驗的旅客。
   tags:
   - 含早餐
+  - 贈紙雕
+  - 健身房
   - 免費停車
-  - 贈紙雕禮品
   image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/5f618c767a9c08f9cbf7cf113773ba0f.jpg
   verified_date: 2026.10.03
   price_source: 官網起價
