@@ -16,8 +16,8 @@ projects:
   price_unit: 每房每晚
   service_charge: excluded
   detail:
-  - 需持 2026 年大巨蛋演唱會或賽事門票，且僅限週一至週四入住方可享九折優惠，含自助早餐、健身房及柑仔鋪免費取用。不得與其他優惠合併，但可累 Cosmos CLUB 點數，適合前往大巨蛋觀賽演的平日旅客
-  - 適用條件：大巨蛋票根、限平日、九折優惠、可累點、不可併用
+  - 持大巨蛋演唱會或賽事門票，限週一至週四入住可享九折優惠，含早餐、健身房及柑仔鋪，並可使用 Cosmos CLUB 累點。不可與其他優惠合併使用，適合有大巨蛋活動門票的平日旅客
+  - 適用條件：限平日、需持門票、含早餐、可累點、不可併用
   valid_to: 2026.12.17
   valid_note: 限平日
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2026TDPASS&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
@@ -29,11 +29,11 @@ projects:
   category: 一般專案
   room: Premier-Double
   meal: buffet Breakfast
-  summary: 需持2026年大巨蛋演唱會或賽事門票，且僅限週一至週四入住方可享九折優惠，含自助早餐、健身房及柑仔鋪免費取用。不得與其他優惠合併，但可累Cosmos CLUB點數，適合前往大巨蛋觀賽演的平日旅客。
+  summary: 持大巨蛋演唱會或賽事門票，限週一至週四入住可享九折優惠，含早餐、健身房及柑仔鋪，並可使用 Cosmos CLUB 累點。不可與其他優惠合併使用，適合有大巨蛋活動門票的平日旅客。
   tags:
-  - 大巨蛋票根
   - 限平日
-  - 九折優惠
+  - 需持門票
+  - 含早餐
   - 可累點
   - 不可併用
   image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/3ed3666c1104ab7915f232218673bc6c.jpg
@@ -46,8 +46,8 @@ projects:
   price_unit: 每房每晚
   service_charge: excluded
   detail:
-  - 持台灣高鐵或台鐵票根可享 96 折優惠，含自助早餐及柑仔鋪，但有數個不適用日期，且不得與其他優惠合併。可累 Cosmos CLUB 點數，適合搭乘大眾運輸、響應低碳旅遊的旅客
-  - 適用條件：雙鐵票根、96 折、可累點、不可併用、含早餐
+  - 持台灣高鐵或台鐵車票票根，含早餐住房可享 96 折，惟特定連假日期不適用且不可與其他優惠合併，可使用 Cosmos CLUB 累點。適合搭乘大眾運輸來台北的旅客
+  - 適用條件：需持車票、含早餐、鐵路優惠、可累點、不可併用
   valid_to: 2026.12.18
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2026-railway&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
@@ -59,13 +59,13 @@ projects:
   category: 環保專案
   room: Luxury-Double
   meal: buffet Breakfast
-  summary: 持台灣高鐵或台鐵票根可享96折優惠，含自助早餐及柑仔鋪，但有數個不適用日期，且不得與其他優惠合併。可累Cosmos CLUB點數，適合搭乘大眾運輸、響應低碳旅遊的旅客。
+  summary: 持台灣高鐵或台鐵車票票根，含早餐住房可享96折，惟特定連假日期不適用且不可與其他優惠合併，可使用 Cosmos CLUB 累點。適合搭乘大眾運輸來台北的旅客。
   tags:
-  - 雙鐵票根
-  - 96 折
+  - 需持車票
+  - 含早餐
+  - 鐵路優惠
   - 可累點
   - 不可併用
-  - 含早餐
   image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/f362630efb9961df29ef370e9d05a313.jpg
   verified_date: 2026.10.03
   price_source: 官網起價
@@ -76,8 +76,8 @@ projects:
   price_unit: 每房每晚
   service_charge: included
   detail:
-  - 限 Cosmos CLUB 會員本人訂購，享九折優惠並含自助早餐，訂房時須填入會員編號，無法出示會員資格需補足差價。適合已加入 Cosmos CLUB 且希望以會員價享早餐住宿的旅客
-  - 適用條件：需會員、九折優惠、含早餐、可累點
+  - 僅限 Cosmos CLUB 會員訂購，享官網價九折並含早餐，訂房時須於特殊需求欄填入會員編號，無法出示會員資格者須現場補差額。適合已是 Cosmos CLUB 會員且重視早餐優惠的旅客
+  - 適用條件：需會員、含早餐、九折優惠、可累點
   valid_to: 2026.12.31
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2023-Cosmos-CLUB-Members-Only&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
@@ -89,11 +89,11 @@ projects:
   category: 會員專案
   room: Premier-Double
   meal: buffet Breakfast
-  summary: 限Cosmos CLUB會員本人訂購，享九折優惠並含自助早餐，訂房時須填入會員編號，無法出示會員資格需補足差價。適合已加入Cosmos CLUB且希望以會員價享早餐住宿的旅客。
+  summary: 僅限 Cosmos CLUB 會員訂購，享官網價九折並含早餐，訂房時須於特殊需求欄填入會員編號，無法出示會員資格者須現場補差額。適合已是 Cosmos CLUB 會員且重視早餐優惠的旅客。
   tags:
   - 需會員
-  - 九折優惠
   - 含早餐
+  - 九折優惠
   - 可累點
   image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/edee8dfe05cdc92c637c9ec737a5c409.jpg
   verified_date: 2026.10.03
@@ -105,8 +105,8 @@ projects:
   price_unit: 每房每晚
   service_charge: excluded
   detail:
-  - 一泊二食方案，含 Happy Hour（15:00–17:00）及隔日自助早餐，並附健身房、柑仔鋪及限量古蹟紙雕贈品。可累 Cosmos CLUB 點數，適合想享用多項餐飲福利的旅客
-  - 適用條件：一泊二食、Happy Hour、可累點、贈紙雕、柑仔鋪
+  - 含隔日自助早餐，並於下午 15:00–17:00 提供 Happy Hour 餐飲（依房型人數），另附柑仔鋪及健身房，可使用 Cosmos CLUB 累點。適合想享受一泊二食並在入住當日放鬆小酌的旅客
+  - 適用條件：一泊二食、Happy Hour、含早餐、可累點、贈紀念品
   valid_to: 2027.06.30
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2024-Happy-Hour&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
@@ -118,13 +118,13 @@ projects:
   category: 享樂專案
   room: Premier-Double
   meal: buffet Breakfast
-  summary: 一泊二食方案，含Happy Hour（15:00–17:00）及隔日自助早餐，並附健身房、柑仔鋪及限量古蹟紙雕贈品。可累Cosmos CLUB點數，適合想享用多項餐飲福利的旅客。
+  summary: 含隔日自助早餐，並於下午 15:00–17:00 提供 Happy Hour 餐飲（依房型人數），另附柑仔鋪及健身房，可使用 Cosmos CLUB 累點。適合想享受一泊二食並在入住當日放鬆小酌的旅客。
   tags:
   - 一泊二食
   - Happy Hour
+  - 含早餐
   - 可累點
-  - 贈紙雕
-  - 柑仔鋪
+  - 贈紀念品
   image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/655bc2ae48133c71f0a29daa8f06a14a.jpg
   verified_date: 2026.10.03
   price_source: 官網起價
@@ -135,8 +135,8 @@ projects:
   price_unit: 每房每晚
   service_charge: excluded
   detail:
-  - 官網限定不含早餐方案，含健身房、柑仔鋪及限量古蹟紙雕贈品，並提供有限免費停車。適合自行安排餐食、想獲得在地文創小禮的旅客
-  - 適用條件：不含早餐、柑仔鋪、贈紙雕、含停車
+  - 官網訂房不含早餐，附贈「旅艋舺 遊西門」古蹟紙雕乙份（隨機款式，贈完為止），並可享免費停車及柑仔鋪。適合自助安排早餐且想探索西門町的旅客
+  - 適用條件：不含早餐、贈紀念品、免費停車、柑仔鋪
   valid_to: 2027.06.30
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=Best-Available-Rate&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
@@ -148,12 +148,12 @@ projects:
   category: 一般專案
   room: Premier-Double
   meal: ''
-  summary: 官網限定不含早餐方案，含健身房、柑仔鋪及限量古蹟紙雕贈品，並提供有限免費停車。適合自行安排餐食、想獲得在地文創小禮的旅客。
+  summary: 官網訂房不含早餐，附贈「旅艋舺 遊西門」古蹟紙雕乙份（隨機款式，贈完為止），並可享免費停車及柑仔鋪。適合自助安排早餐且想探索西門町的旅客。
   tags:
   - 不含早餐
+  - 贈紀念品
+  - 免費停車
   - 柑仔鋪
-  - 贈紙雕
-  - 含停車
   image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/f3fb9a05e4e225781a8262bbcdb799db.jpg
   verified_date: 2026.10.03
   price_source: 官網起價
@@ -164,8 +164,8 @@ projects:
   price_unit: 每房每晚
   service_charge: excluded
   detail:
-  - 官網含早餐方案，附自助早餐、健身房、柑仔鋪及限量古蹟紙雕贈品，並提供有限免費停車。適合想享用早餐並獲得在地文創小禮的旅客
-  - 適用條件：含早餐、柑仔鋪、贈紙雕、含停車
+  - 官網訂房含自助早餐，附贈「旅艋舺 遊西門」古蹟紙雕乙份（贈完為止），並提供免費停車及柑仔鋪。適合希望一併解決早餐需求、想探索西門周邊的旅客
+  - 適用條件：含早餐、贈紀念品、免費停車、柑仔鋪
   valid_to: 2027.06.30
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=Best-Available-Rate-With-BF&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
@@ -177,12 +177,12 @@ projects:
   category: 一般專案
   room: Premier-Double
   meal: buffet Breakfast
-  summary: 官網含早餐方案，附自助早餐、健身房、柑仔鋪及限量古蹟紙雕贈品，並提供有限免費停車。適合想享用早餐並獲得在地文創小禮的旅客。
+  summary: 官網訂房含自助早餐，附贈「旅艋舺 遊西門」古蹟紙雕乙份（贈完為止），並提供免費停車及柑仔鋪。適合希望一併解決早餐需求、想探索西門周邊的旅客。
   tags:
   - 含早餐
+  - 贈紀念品
+  - 免費停車
   - 柑仔鋪
-  - 贈紙雕
-  - 含停車
   image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/5f618c767a9c08f9cbf7cf113773ba0f.jpg
   verified_date: 2026.10.03
   price_source: 官網起價
