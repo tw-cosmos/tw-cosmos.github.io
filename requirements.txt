@@ -1,5 +1,4 @@
-# build (scripts/build.py)
+# build.py, sync_notion.py, notify_telegram.py
 pyyaml
-playwright
-# sync (scripts/sync_notion.py)
+# sync_notion.py
 requests
