@@ -9,6 +9,14 @@ Each offer renders as a single self-contained paragraph that opens with
 the venue name and the offer name, so that any fragment of the text
 remains attributable to the correct offer when processed downstream.
 
+The page carries no room rates (docs/kms_sync_notion_spec v2): the place
+where a price used to sit holds a fixed sentence pointing to the booking
+link, and the finished page is checked by price_guard before it is
+written. A hit fails the build so that no price is ever published.
+
+內容更新日 is the date the page content last changed: when the new page
+equals the current one apart from that date, the old date is kept.
+
 Usage:
     python scripts/build.py
     python scripts/build.py --style list
@@ -18,7 +26,9 @@ Requires: pip install pyyaml
 
 import argparse
 import html
+import re
 import sys
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 try:
@@ -26,19 +36,21 @@ try:
 except ImportError:
     sys.exit("Missing dependency. Run: pip install pyyaml")
 
+from price_guard import find_price
+
 
 # "narrative" -> one flowing paragraph per offer (default)
 # "list"      -> heading plus <ul><li>, kept for comparison only
 DEFAULT_STYLE = "narrative"
 
-# Wording is deliberately terse and unambiguous. A longer phrase such as
-# "本價格未含 10% 服務費，結帳時另計" gets abbreviated downstream to
-# "不含服務費", which reads as "no service charge applies" rather than
-# "a service charge is added". "另加" cannot be shortened into that reading.
-SERVICE_CHARGE = {
-    "included": "已含 10% 服務費",
-    "excluded": "另加 10% 服務費",
-}
+# Stands where the reference price used to be.
+PRICE_SENTENCE = "房價依入住日期與房型浮動，請以訂房連結即時報價為準"
+
+# Taiwan has no DST, so a fixed offset is exact.
+TAIPEI = timezone(timedelta(hours=8))
+
+UPDATED_LABEL = "內容更新日："
+UPDATED_RE = re.compile(re.escape(UPDATED_LABEL) + r"([0-9.]+)")
 
 CSS = """
 :root { color-scheme: light; }
@@ -64,29 +76,6 @@ hr { border: 0; border-top: 1px solid #eee; margin: 2.5rem 0 1.5rem; }
 
 def esc(value):
     return html.escape(str(value or "").strip())
-
-
-def price_phrase(offer):
-    amount = offer.get("price_from")
-    unit = str(offer.get("price_unit") or "").strip()
-    charge = SERVICE_CHARGE.get(offer.get("service_charge"))
-
-    if charge is None:
-        raise ValueError(
-            f"offer {offer.get('id')}: service_charge must be "
-            f"'included' or 'excluded', got {offer.get('service_charge')!r}"
-        )
-
-    if amount in (None, "", "TBD"):
-        raise ValueError(f"offer {offer.get('id')}: price_from not confirmed")
-
-    try:
-        amount = f"{int(amount):,}"
-    except (TypeError, ValueError):
-        pass
-
-    inner = "，".join(x for x in (unit, charge) if x)
-    return f"參考起始價 NT${amount} 起（{inner}）"
 
 
 def validity_phrase(offer):
@@ -115,13 +104,8 @@ def hashtag_suffix(offer):
     return " ".join(f"#{t}" for t in tags)
 
 
-def render_narrative(venue, offer, disclaimer):
-    """One offer, one paragraph, opening with venue and offer name.
-
-    A heading is emitted purely as a visual anchor for human maintenance.
-    The paragraph repeats the venue and offer name so that the text stays
-    self-describing even when the heading is not carried along.
-    """
+def narrative_sentence(venue, offer):
+    """The plain-text paragraph for one offer, as rendered and measured."""
     body = "，".join(str(x).strip() for x in (offer.get("detail") or []) if str(x).strip())
 
     url = str(offer.get("booking_url") or "").strip()
@@ -135,12 +119,23 @@ def render_narrative(venue, offer, disclaimer):
     tags = hashtag_suffix(offer)
     tag_clause = f" {tags}" if tags else ""
 
-    sentence = (
+    return (
         f"{venue}「{offer['name_zh']}」{link_clause}，"
-        f"{price_phrase(offer)}，"
-        f"{body}，"
-        f"{validity_phrase(offer)}。{tag_clause}"
+        f"{PRICE_SENTENCE}，"
+        + (f"{body}，" if body else "")
+        + f"{validity_phrase(offer)}。{tag_clause}"
     )
+
+
+def render_narrative(venue, offer, disclaimer):
+    """One offer, one paragraph, opening with venue and offer name.
+
+    A heading is emitted purely as a visual anchor for human maintenance.
+    The paragraph repeats the venue and offer name so that the text stays
+    self-describing even when the heading is not carried along.
+    """
+    url = str(offer.get("booking_url") or "").strip()
+    sentence = narrative_sentence(venue, offer)
 
     parts = [
         f"  <h2>{esc(offer['name_zh'])}</h2>",
@@ -161,7 +156,7 @@ def render_list(venue, offer, disclaimer):
 
     parts = [
         f"  <h2>{esc(venue)}「{esc(offer['name_zh'])}」</h2>",
-        f"  <p>{esc(price_phrase(offer))}</p>",
+        f"  <p>{esc(PRICE_SENTENCE)}</p>",
         f"  <ul>\n{rows}\n  </ul>",
         f"  <p>{esc(validity_phrase(offer))}</p>",
     ]
@@ -193,17 +188,7 @@ def build(data_file, style):
             continue
         sections.append(render(venue, offer, disclaimer))
         # plain-text length of this block, for the downstream size check
-        _url = str(offer.get("booking_url") or "").strip()
-        _link = f"，訂房連結 {_url} " if _url else ""
-        plain = (
-            f"{venue}「{offer['name_zh']}」{_link}，{price_phrase(offer)}，"
-            + "，".join(str(x).strip() for x in (offer.get("detail") or []))
-            + f"，{validity_phrase(offer)}。"
-        )
-        _tags = hashtag_suffix(offer)
-        if _tags:
-            plain += " " + _tags
-        lengths.append((offer.get("id"), len(plain)))
+        lengths.append((offer.get("id"), len(narrative_sentence(venue, offer))))
 
     if not sections:
         sections.append("<section>\n  <p>內容準備中。</p>\n</section>")
@@ -213,14 +198,8 @@ def build(data_file, style):
     title = esc(prop.get("page_title") or venue)
     description = esc(prop.get("page_description"))
 
-    verified = ""
-    if prop.get("verified_date"):
-        verified = (
-            f'\n<hr>\n<p class="note">內容更新日：'
-            f'{esc(prop.get("verified_date"))}</p>'
-        )
-
-    page = f"""<!DOCTYPE html>
+    def page_for(updated):
+        return f"""<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
@@ -233,17 +212,36 @@ def build(data_file, style):
 <body>
 <h1>{esc(venue)}</h1>
 
-{body}{verified}
+{body}
+<hr>
+<p class="note">{UPDATED_LABEL}{updated}</p>
 </body>
 </html>
 """
 
+    # Last line of defence: no price-like text may reach the page. URLs
+    # are left out of the check; they carry rate codes, not amounts.
+    visible = re.sub(r"https?://\S+", " ", html.unescape(re.sub(r"<[^>]+>", " ", page_for(""))))
+    leak = find_price(visible)
+    if leak:
+        raise ValueError(f"price-like text on the page: {leak!r}")
+
     out_path = Path(slug) / "index.html"
+    old_page = out_path.read_text(encoding="utf-8") if out_path.exists() else ""
+    m = UPDATED_RE.search(old_page)
+    if m and page_for(m.group(1)) == old_page:
+        page = old_page
+        state = f"unchanged since {m.group(1)}"
+    else:
+        updated = datetime.now(TAIPEI).strftime("%Y.%m.%d")
+        page = page_for(updated)
+        state = f"content changed, 內容更新日 {updated}"
+
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(page, encoding="utf-8")
 
     report = ", ".join(f"#{i}:{n}" for i, n in lengths)
-    print(f"{data_file} -> {out_path} [{style}] {len(sections)} sections")
+    print(f"{data_file} -> {out_path} [{style}] {len(sections)} sections, {state}")
     print(f"  plain-text length per section: {report}")
 
 

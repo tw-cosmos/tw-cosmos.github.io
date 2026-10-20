@@ -3,17 +3,20 @@
 Notion -> data/taipei-garden.yml generator.
 
 Reads the "Cosmos 官網專案每日監控" Notion database, keeps only the rows
-that pass the verification gate, and rewrites data/taipei-garden.yml so
-that the existing build (scripts/build.py) can render it unchanged.
+that pass the publish rules, and rewrites data/taipei-garden.yml for
+scripts/build.py to render.
 
-Verification gate (all conditions must hold, see docs/kms_sync_notion_spec):
+Publish rules (all must hold, see docs/kms_sync_notion_spec v2 section 3):
     來源 = 台北花園
     上架狀態 = 上架中
-    發布狀態 = 已核實
-    核實日 non-empty
-    服務費 non-empty (已含 / 另加)
-Rows that fail the gate are counted in the log and never rendered.
-Rows without a usable price or without 檔期迄 are skipped with a log line.
+    發布狀態 != 排除   (empty, 待審 and 已核實 all publish)
+    檔期迄 non-empty and >= today (Asia/Taipei)
+    訂房連結 non-empty
+Rows that fail are counted in the log and never rendered.
+
+No price is read or written: rates change daily and are left to the
+booking link. Name, summary and tags are checked by price_guard; a field
+that looks like a price is dropped and logged as "price leak dropped".
 
 The YAML is only written when at least one row passes. Any API failure or
 an empty result leaves the existing file untouched and exits non-zero, so
@@ -28,12 +31,14 @@ Requires: pip install pyyaml requests
 
 import argparse
 import json
-import math
 import os
 import re
 import sys
 import unicodedata
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
+
+from price_guard import find_price
 
 try:
     import yaml
@@ -51,13 +56,10 @@ NOTION_QUERY_URL = f"https://api.notion.com/v1/data_sources/{DATA_SOURCE_ID}/que
 
 SOURCE_VALUE = "台北花園"
 LISTED_VALUE = "上架中"
-PUBLISH_OK = "已核實"
-PUBLISH_PENDING = "待審"
+PUBLISH_EXCLUDED = "排除"
 
-SERVICE_CHARGE_MAP = {
-    "已含": "included",
-    "另加": "excluded",
-}
+# Taiwan has no DST, so a fixed offset is exact.
+TAIPEI = timezone(timedelta(hours=8))
 
 # Property names exactly as they appear in Notion.
 P = {
@@ -65,10 +67,6 @@ P = {
     "source": "來源",
     "listed": "上架狀態",
     "publish": "發布狀態",
-    "verified": "核實日",
-    "service": "服務費",
-    "price_site": "官網起價",
-    "price_night": "每晚價",
     "from": "檔期起",
     "to": "檔期迄",
     "room": "房型",
@@ -96,11 +94,10 @@ PROPERTY_BLOCK = {
     "name_en": "Taipei Garden Hotel",
     "page_title": "台北花園大酒店、住宿專案",
     "page_description": "台北花園大酒店住宿專案資訊，含專案內容與適用期間。",
-    "price_disclaimer": "價格為參考起始價，實際房價依訂房日期與房型浮動，請以線上訂房系統顯示為準。",
-    "verified_source": "Notion 監控庫（核實閘）",
+    "price_disclaimer": "本頁不載明房價。房價依入住日期與房型浮動，請以線上訂房頁面即時報價為準。",
+    "data_source": "Notion 監控庫",
 }
 
-PRICE_UNIT = "每房每晚"
 HASHTAGS = ["住房優惠", "住房專案", "訂房優惠"]
 DEFAULT_PROPERTY_CODE = "twtai17118"
 BOOKING_TEMPLATE = (
@@ -143,7 +140,13 @@ def fetch_rows(token):
             body["start_cursor"] = cursor
         resp = requests.post(NOTION_QUERY_URL, headers=headers, json=body, timeout=60)
         if resp.status_code != 200:
-            sys.exit(f"Notion API error {resp.status_code}: {resp.text[:500]}")
+            # The Actions log is public: report the error code only, never
+            # the raw reply.
+            try:
+                code = resp.json().get("code")
+            except ValueError:
+                code = None
+            sys.exit(f"Notion API error {resp.status_code} ({code or 'no code'})")
         payload = resp.json()
         rows.extend(payload.get("results") or [])
         if not payload.get("has_more"):
@@ -251,7 +254,7 @@ def slugify(text):
 # Row -> offer
 # --------------------------------------------------------------------------
 
-def gate(page, counts):
+def gate(page, counts, today, log):
     """Return the reason a row is excluded, or None if it passes."""
     if prop(page, "source") != SOURCE_VALUE:
         counts["source_other"] += 1
@@ -259,35 +262,31 @@ def gate(page, counts):
     if prop(page, "listed") != LISTED_VALUE:
         counts["delisted"] += 1
         return "delisted"
-    publish = prop(page, "publish")
-    if publish != PUBLISH_OK:
-        if publish == PUBLISH_PENDING:
-            counts["pending"] += 1
-        else:
-            counts["publish_other"] += 1
-        return "publish"
-    if not prop(page, "verified"):
-        counts["verified_missing"] += 1
-        return "verified_missing"
-    service = prop(page, "service")
-    if not service:
-        counts["service_charge_missing"] += 1
-        return "service_charge_missing"
-    if service not in SERVICE_CHARGE_MAP:
-        counts["service_charge_unknown"] += 1
-        return "service_charge_unknown"
+    if prop(page, "publish") == PUBLISH_EXCLUDED:
+        counts["excluded"] += 1
+        return "excluded"
+    valid_to = str(prop(page, "to") or "")[:10]
+    if not valid_to:
+        counts["valid_to_missing"] += 1
+        return "valid_to_missing"
+    if valid_to < today:
+        counts["expired"] += 1
+        return "expired"
+    if not prop(page, "booking"):
+        counts["booking_missing"] += 1
+        row = prop(page, "code") or prop(page, "match_key") or page.get("id")
+        log.append(f"  [{row}] SKIP 訂房連結 missing")
+        return "booking_missing"
     return None
 
 
-def pick_price(page):
-    """Return (price, source_label) or (None, None)."""
-    site = prop(page, "price_site")
-    if site not in (None, ""):
-        return int(math.floor(float(site) + 0.5)), "官網起價"
-    night = prop(page, "price_night")
-    if night not in (None, ""):
-        return int(math.floor(float(night) + 0.5)), "每晚價(四捨五入)"
-    return None, None
+def guard(offer_id, field, text, log):
+    """Return text unchanged, or "" when it looks like it carries a price."""
+    hit = find_price(text)
+    if hit:
+        log.append(f"  [{offer_id}] price leak dropped: {field} ({hit})")
+        return ""
+    return text
 
 
 def to_offer(page, log):
@@ -302,23 +301,21 @@ def to_offer(page, log):
     if not name:
         log.append(f"  [{offer_id}] SKIP name missing")
         return None
-
-    price, price_src = pick_price(page)
-    if price is None:
-        log.append(f"  [{offer_id}] SKIP price missing")
+    # The name cannot be dropped like the other fields, so the row goes.
+    if not guard(offer_id, "專案名稱", name, log):
+        log.append(f"  [{offer_id}] SKIP name carries a price")
         return None
 
     valid_to = dot_date(prop(page, "to"))
-    if not valid_to:
-        log.append(f"  [{offer_id}] SKIP valid_to missing")
-        return None
 
+    # Tags are checked one by one: only the tag with a price is dropped.
     tags = [normalise(t) for t in (prop(page, "tags") or [])]
-    tags = [t for t in tags if t]
+    tags = [t for t in tags if t and guard(offer_id, "標籤項", t, log)]
     condition_tags = [t for t in tags if t not in EXCLUDED_TAGS]
     note_tags = [t for t in condition_tags if any(m in t for m in VALID_NOTE_MARKERS)]
 
-    summary = normalise(prop(page, "summary")).rstrip("。")
+    raw_summary = guard(offer_id, "摘要", prop(page, "summary") or "", log)
+    summary = normalise(raw_summary).rstrip("。")
     detail = []
     if summary:
         detail.append(summary)
@@ -332,15 +329,12 @@ def to_offer(page, log):
         booking_url = prop(page, "booking") or ""
         log.append(f"  [{offer_id}] booking_url taken from Notion as-is (no 內部代碼)")
 
-    log.append(f"  [{offer_id}] price {price} from {price_src}; valid_to {valid_to}; {name}")
+    log.append(f"  [{offer_id}] valid_to {valid_to}; {name}")
 
     return {
         "id": offer_id,
         "name_zh": name,
         "name_en": "",
-        "price_from": price,
-        "price_unit": PRICE_UNIT,
-        "service_charge": SERVICE_CHARGE_MAP[prop(page, "service")],
         "detail": detail,
         "valid_to": valid_to,
         "valid_note": "、".join(note_tags),
@@ -349,30 +343,28 @@ def to_offer(page, log):
         # reference fields, not rendered by build.py
         "valid_from": dot_date(prop(page, "from")),
         "category": prop(page, "category") or "",
-        "room": prop(page, "room") or "",
-        "meal": prop(page, "meal") or "",
-        "summary": prop(page, "summary") or "",
+        "room": guard(offer_id, "房型", prop(page, "room") or "", log),
+        "meal": guard(offer_id, "餐食", prop(page, "meal") or "", log),
+        "summary": raw_summary,
         "tags": tags,
         "image": prop(page, "image") or "",
-        "verified_date": dot_date(prop(page, "verified")),
-        "price_source": price_src,
     }
 
 
-def build_document(pages, log):
+def build_document(pages, log, today=None):
+    today = today or datetime.now(TAIPEI).strftime("%Y-%m-%d")
     counts = {
         "total": len(pages),
         "source_other": 0,
         "delisted": 0,
-        "pending": 0,
-        "publish_other": 0,
-        "verified_missing": 0,
-        "service_charge_missing": 0,
-        "service_charge_unknown": 0,
+        "excluded": 0,
+        "valid_to_missing": 0,
+        "expired": 0,
+        "booking_missing": 0,
     }
     passed = []
     for page in pages:
-        if gate(page, counts) is None:
+        if gate(page, counts, today, log) is None:
             passed.append(page)
 
     offers = []
@@ -381,27 +373,22 @@ def build_document(pages, log):
         if offer:
             offers.append(offer)
 
-    # 檔期迄 ascending; rows without it were skipped above. id as tiebreak.
+    # 檔期迄 ascending; rows without it were excluded above. id as tiebreak.
     offers.sort(key=lambda o: (o["valid_to"], o["id"]))
 
-    verified_dates = [o["verified_date"] for o in offers if o["verified_date"]]
-    prop_block = dict(PROPERTY_BLOCK)
-    verified_source = prop_block.pop("verified_source")
-    prop_block["verified_date"] = max(verified_dates) if verified_dates else ""
-    prop_block["verified_source"] = verified_source
-
-    return {"property": prop_block, "projects": offers}, counts
+    # No date is carried here: build.py sets 內容更新日 from actual page
+    # changes, so a date in the YAML would only cause empty commits.
+    return {"property": dict(PROPERTY_BLOCK), "projects": offers}, counts
 
 
 def summary_lines(counts, produced):
     return [
         f"rows with 來源={SOURCE_VALUE}: {counts['total']}",
         f"  已下架: {counts['delisted']}",
-        f"  發布狀態=待審: {counts['pending']}",
-        f"  發布狀態 other/empty: {counts['publish_other']}",
-        f"  核實日 missing: {counts['verified_missing']}",
-        f"  服務費 missing: {counts['service_charge_missing']}",
-        f"  服務費 unknown value: {counts['service_charge_unknown']}",
+        f"  發布狀態=排除: {counts['excluded']}",
+        f"  檔期迄 missing: {counts['valid_to_missing']}",
+        f"  檔期迄 past: {counts['expired']}",
+        f"  訂房連結 missing: {counts['booking_missing']}",
         f"  produced: {produced}",
     ]
 
@@ -444,12 +431,12 @@ def main():
         print(line)
 
     if produced == 0:
-        sys.exit("ERROR: no row passed the verification gate; YAML left untouched")
+        sys.exit("ERROR: no row passed the publish rules; YAML left untouched")
 
     out_path = Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     write_yaml(doc, out_path)
-    print(f"wrote {out_path} ({produced} projects, verified_date {doc['property']['verified_date']})")
+    print(f"wrote {out_path} ({produced} projects)")
 
 
 if __name__ == "__main__":

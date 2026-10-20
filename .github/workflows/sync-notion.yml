@@ -29,16 +29,18 @@ jobs:
         run: pip install -r requirements.txt
 
       # Fails the job (and leaves data/ untouched) on API error or when no
-      # row passes the verification gate.
+      # row passes the publish rules.
       - name: Generate YAML from Notion
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
         run: python scripts/sync_notion.py
 
+      # Fails the job when price-like text would reach the page.
       - name: Build pages
         run: python scripts/build.py
 
       - name: Commit when something changed
+        id: commit
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -47,6 +49,29 @@ jobs:
             echo "no change"
             exit 0
           fi
+          # Only a page change needs a KMS re-import; a YAML-only change
+          # (unrendered reference fields) is committed silently.
+          if git diff --staged --quiet -- taipei-garden/index.html; then
+            echo "page_changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "page_changed=true" >> "$GITHUB_OUTPUT"
+          fi
+          echo "before=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           today=$(TZ=Asia/Taipei date +%Y-%m-%d)
           git commit -m "sync: notion ${today}"
           git push
+
+      # Missing secrets only log "telegram skipped"; the job still passes.
+      - name: Notify Telegram of page change
+        if: steps.commit.outputs.page_changed == 'true'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python scripts/notify_telegram.py change --before "${{ steps.commit.outputs.before }}"
+
+      - name: Notify Telegram of failure
+        if: failure()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python3 scripts/notify_telegram.py failure
