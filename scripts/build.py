@@ -127,6 +127,17 @@ def narrative_sentence(venue, offer):
     )
 
 
+def booking_link(offer, url):
+    """<p> with the booking link, labelled "<offer name> 線上訂房".
+
+    The space follows the punctuation rules: kept after a half-width
+    ending (PASS), dropped after Chinese or full-width punctuation (）).
+    """
+    name = str(offer.get("name_zh") or "").strip()
+    sep = " " if name[-1:].isascii() else ""
+    return f'  <p><a href="{esc(url)}">{esc(name)}{sep}線上訂房</a></p>'
+
+
 def render_narrative(venue, offer, disclaimer):
     """One offer, one paragraph, opening with venue and offer name.
 
@@ -144,7 +155,7 @@ def render_narrative(venue, offer, disclaimer):
     if disclaimer:
         parts.append(f'  <p class="note">{esc(disclaimer)}</p>')
     if url:
-        parts.append(f'  <p><a href="{esc(url)}">線上訂房</a></p>')
+        parts.append(booking_link(offer, url))
 
     return "<section>\n" + "\n".join(parts) + "\n</section>"
 
@@ -165,7 +176,7 @@ def render_list(venue, offer, disclaimer):
 
     url = str(offer.get("booking_url") or "").strip()
     if url:
-        parts.append(f'  <p><a href="{esc(url)}">線上訂房</a></p>')
+        parts.append(booking_link(offer, url))
 
     return "<section>\n" + "\n".join(parts) + "\n</section>"
 
