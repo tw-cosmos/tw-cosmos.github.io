@@ -12,8 +12,8 @@ projects:
   name_zh: 大巨蛋好宿 PASS
   name_en: ''
   detail:
-  - 持 2026 年大巨蛋演唱會或賽事門票，限週一至週四入住可享官網價九折，含自助早餐、健身房及柑仔鋪免費取用乙次，且可累積 Cosmos CLUB 會員點數。不得與其他優惠合併使用，適合持票觀演的平日住客
-  - 適用條件：需持票入場、限平日、含早餐、可累點、不可併用
+  - 持大巨蛋演唱會或賽事門票於週一至週四入住，可享官網優惠價九折，含隔日早餐、健身房及柑仔鋪取用，且可累積 Cosmos CLUB 點數。此專案不得與其他優惠併用
+  - 適用條件：含早餐、限平日、需持票、可累點、不可併用
   valid_to: 2026.12.17
   valid_note: 限平日
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2026TDPASS&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
@@ -25,11 +25,11 @@ projects:
   category: 一般專案
   room: Premier-Double
   meal: buffet Breakfast
-  summary: 持2026年大巨蛋演唱會或賽事門票，限週一至週四入住可享官網價九折，含自助早餐、健身房及柑仔鋪免費取用乙次，且可累積Cosmos CLUB會員點數。不得與其他優惠合併使用，適合持票觀演的平日住客。
+  summary: 持大巨蛋演唱會或賽事門票於週一至週四入住，可享官網優惠價九折，含隔日早餐、健身房及柑仔鋪取用，且可累積Cosmos CLUB點數。此專案不得與其他優惠併用。
   tags:
-  - 需持票入場
-  - 限平日
   - 含早餐
+  - 限平日
+  - 需持票
   - 可累點
   - 不可併用
   image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/3ed3666c1104ab7915f232218673bc6c.jpg
@@ -62,10 +62,10 @@ projects:
   name_zh: Cosmos CLUB 會員專屬禮遇
   name_en: ''
   detail:
-  - 限 Cosmos CLUB 會員本人預訂，享九折優惠並含自助早餐；訂房時須填入會員編號，無法出示會員身份者須補繳差價。適合已持有 Cosmos CLUB 會籍、希望以優惠價含早入住的旅客
-  - 適用條件：需會員、含早餐、會員九折、限本人預訂
+  - 僅限 Cosmos CLUB 會員本人預訂，享官網房價九折優惠並含早餐；訂房時須填入會員編號，無法出示會員資格者須補足差額
+  - 適用條件：含早餐、需會員、九折優惠、限本人
   valid_to: 2027.06.30
-  valid_note: 限本人預訂
+  valid_note: 限本人
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2023-Cosmos-CLUB-Members-Only&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
   hashtags:
   - 住房優惠
@@ -75,19 +75,19 @@ projects:
   category: 會員專案
   room: Premier-Double
   meal: buffet Breakfast
-  summary: 限Cosmos CLUB會員本人預訂，享九折優惠並含自助早餐；訂房時須填入會員編號，無法出示會員身份者須補繳差價。適合已持有Cosmos CLUB會籍、希望以優惠價含早入住的旅客。
+  summary: 僅限Cosmos CLUB會員本人預訂，享官網房價九折優惠並含早餐；訂房時須填入會員編號，無法出示會員資格者須補足差額。
   tags:
-  - 需會員
   - 含早餐
-  - 會員九折
-  - 限本人預訂
+  - 需會員
+  - 九折優惠
+  - 限本人
   image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/edee8dfe05cdc92c637c9ec737a5c409.jpg
 - id: 2024-Happy-Hour
   name_zh: 尊寵禮遇 Happy Hour 一泊二食住房優惠
   name_en: ''
   detail:
-  - 一泊二食方案，含 Happy Hour（15:00–17:00）及隔日自助早餐，並贈旅艋舺古蹟紙雕乙份，可累積 Cosmos CLUB 會員點數。適合希望入住期間早、午茶皆有著落且想累點的旅客
-  - 適用條件：一泊二食、Happy Hour 下午茶、含早餐、可累點、贈紀念品
+  - 入住期間享 15:00–17:00 Happy Hour 餐飲招待（依房型人數），含隔日早餐、健身房及柑仔鋪取用，並贈西門古蹟紙雕，可累積 Cosmos CLUB 點數
+  - 適用條件：一泊二食、Happy Hour、可累點、贈紙雕
   valid_to: 2027.06.30
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2024-Happy-Hour&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
@@ -99,20 +99,19 @@ projects:
   category: 享樂專案
   room: Premier-Double
   meal: buffet Breakfast
-  summary: 一泊二食方案，含Happy Hour（15:00–17:00）及隔日自助早餐，並贈旅艋舺古蹟紙雕乙份，可累積Cosmos CLUB會員點數。適合希望入住期間早、午茶皆有著落且想累點的旅客。
+  summary: 入住期間享 15:00–17:00 Happy Hour 餐飲招待（依房型人數），含隔日早餐、健身房及柑仔鋪取用，並贈西門古蹟紙雕，可累積Cosmos CLUB點數。
   tags:
   - 一泊二食
-  - Happy Hour 下午茶
-  - 含早餐
+  - Happy Hour
   - 可累點
-  - 贈紀念品
+  - 贈紙雕
   image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/655bc2ae48133c71f0a29daa8f06a14a.jpg
 - id: Best-Available-Rate
   name_zh: 官網優惠專案（不含早）
   name_en: ''
   detail:
-  - 不含早餐的官網優惠房價，附贈旅艋舺古蹟紙雕乙份（隨機款式，贈完為止），可免費使用健身房、柑仔鋪及停車場（車位有限，不保留）。適合不需早餐、想探索西門町周邊的旅客
-  - 適用條件：不含早餐、贈紀念品、免費停車、免費健身房
+  - 官網訂房享免費健身房、無線網路及柑仔鋪取用，並贈送西門古蹟紙雕一份，提供免費停車（車位有限）。不含早餐，適合自由安排餐食的旅客
+  - 適用條件：不含早、免費停車、贈紙雕、免費健身房
   valid_to: 2027.06.30
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=Best-Available-Rate&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
@@ -124,19 +123,19 @@ projects:
   category: 一般專案
   room: Premier-Double
   meal: ''
-  summary: 不含早餐的官網優惠房價，附贈旅艋舺古蹟紙雕乙份（隨機款式，贈完為止），可免費使用健身房、柑仔鋪及停車場（車位有限，不保留）。適合不需早餐、想探索西門町周邊的旅客。
+  summary: 官網訂房享免費健身房、無線網路及柑仔鋪取用，並贈送西門古蹟紙雕一份，提供免費停車（車位有限）。不含早餐，適合自由安排餐食的旅客。
   tags:
-  - 不含早餐
-  - 贈紀念品
+  - 不含早
   - 免費停車
+  - 贈紙雕
   - 免費健身房
   image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/f3fb9a05e4e225781a8262bbcdb799db.jpg
 - id: Best-Available-Rate-With-BF
   name_zh: 官網優惠專案（含早餐）
   name_en: ''
   detail:
-  - 含自助早餐的官網優惠方案，附贈旅艋舺古蹟紙雕乙份（隨機款式，贈完為止），可免費使用健身房、柑仔鋪及停車場（車位有限，不保留）。適合希望含早餐並享受西門町周邊文化體驗的旅客
-  - 適用條件：含早餐、贈紀念品、免費停車、免費健身房
+  - 官網訂房含自助早餐，並附免費健身房、無線網路、柑仔鋪取用及西門古蹟紙雕，提供免費停車（車位有限）。適合希望含早出遊的旅客
+  - 適用條件：含早餐、免費停車、贈紙雕、免費健身房
   valid_to: 2027.06.30
   valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=Best-Available-Rate-With-BF&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
@@ -148,11 +147,11 @@ projects:
   category: 一般專案
   room: Premier-Double
   meal: buffet Breakfast
-  summary: 含自助早餐的官網優惠方案，附贈旅艋舺古蹟紙雕乙份（隨機款式，贈完為止），可免費使用健身房、柑仔鋪及停車場（車位有限，不保留）。適合希望含早餐並享受西門町周邊文化體驗的旅客。
+  summary: 官網訂房含自助早餐，並附免費健身房、無線網路、柑仔鋪取用及西門古蹟紙雕，提供免費停車（車位有限）。適合希望含早出遊的旅客。
   tags:
   - 含早餐
-  - 贈紀念品
   - 免費停車
+  - 贈紙雕
   - 免費健身房
   image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/5f618c767a9c08f9cbf7cf113773ba0f.jpg
 - id: Love-Our-Environment
