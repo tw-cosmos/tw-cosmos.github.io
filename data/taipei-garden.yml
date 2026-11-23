@@ -37,10 +37,10 @@ projects:
   name_zh: 雙鐵旅遊、低碳同行住房專案
   name_en: ''
   detail:
-  - 持台灣高鐵或台鐵票根入住可享九六折優惠，含早餐及柑仔鋪一次免費取用，部分日期不適用。適合搭乘大眾運輸來台北的低碳旅客
-  - 適用條件：需票根、含早餐、可累點、不可併用、有排除日期
+  - 憑台灣高鐵或台鐵票根可享 96 折住房優惠，並附贈隔日早餐（Buffet）及免費柑仔鋪取用乙次。適合搭乘大眾運輸來台北旅遊、注重低碳出行的旅客
+  - 適用條件：含早餐、持鐵路票根 96 折、可累點、免費柑仔鋪、不可併用其他優惠
   valid_to: 2026.12.18
-  valid_note: 有排除日期
+  valid_note: ''
   booking_url: https://www.book-secure.com/index.php?s=results&property=twtai17118&rate=2026-railway&advance=1-days&adults1=2&children1=0&locale=zh_Hant_HK
   hashtags:
   - 住房優惠
@@ -50,13 +50,13 @@ projects:
   category: 環保專案
   room: Luxury-Double
   meal: buffet Breakfast
-  summary: 持台灣高鐵或台鐵票根入住可享九六折優惠，含早餐及柑仔鋪一次免費取用，部分日期不適用。適合搭乘大眾運輸來台北的低碳旅客。
+  summary: 憑台灣高鐵或台鐵票根可享96折住房優惠，並附贈隔日早餐（Buffet）及免費柑仔鋪取用乙次。適合搭乘大眾運輸來台北旅遊、注重低碳出行的旅客。
   tags:
-  - 需票根
   - 含早餐
+  - 持鐵路票根 96 折
   - 可累點
-  - 不可併用
-  - 有排除日期
+  - 免費柑仔鋪
+  - 不可併用其他優惠
   image: https://mediastore.hotelcontent.net/677c7df1d25bf26e04c0c139beb53021/79521cdea3eff83/f362630efb9961df29ef370e9d05a313.jpg
 - id: 2023-Cosmos-CLUB-Members-Only
   name_zh: Cosmos CLUB 會員專屬禮遇
